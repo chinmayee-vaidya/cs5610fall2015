@@ -6,11 +6,11 @@
     function ProfileController($scope, $rootScope, UserService) {
 
         //set the models using rootScope.user
-        if($rootScope.user !== undefined){
+        if ($rootScope.user !== undefined) {
             $scope.username = $rootScope.user.username;
             $scope.password = $rootScope.user.password;
-            $scope.firstname = $rootScope.user.firstname;
-            $scope.lastname = $rootScope.user.lastname;
+            $scope.firstname = $rootScope.user.firstName;
+            $scope.lastname = $rootScope.user.lastName;
             $scope.email = $rootScope.user.email;
         }
 
@@ -20,22 +20,19 @@
             var updated_user = {
                 username: $scope.username,
                 password: $scope.password,
-                firstname: $scope.firstname,
-                lastname: $scope.lastname,
+                firstName: $scope.firstname,
+                lastName: $scope.lastname,
                 email: $scope.email
             };
 
-            UserService.updateUser($rootScope.user.user_id, updated_user, function(updated) {
-
+            UserService.updateUser($rootScope.user.id, updated_user).then(function(updated){
                 //now set the models to new names
                 $rootScope.user = updated;
-
                 $scope.username = $rootScope.user.username;
                 $scope.password = $rootScope.user.password;
-                $scope.firstname = $rootScope.user.firstname;
-                $scope.lastname = $rootScope.user.lastname;
+                $scope.firstname = $rootScope.user.firstName;
+                $scope.lastname = $rootScope.user.lastName;
                 $scope.email = $rootScope.user.email;
-
             });
         };
 

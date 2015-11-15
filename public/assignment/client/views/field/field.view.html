@@ -1,0 +1,105 @@
+<div>
+    <h1>Forms</h1>
+    <hr>
+    <ul class="nav nav-tabs">
+        <li role="presentation">
+            <a href="#/form">Forms</a>
+        </li>
+        <li class="active" role="presentation">
+            <a href="#/field">Fields</a>
+        </li>
+    </ul>
+
+    <br>
+
+    <div class="tab-pane fade in active">
+
+        <form ng-controller="FieldController">
+
+            <!--ngrepeat all fields-->
+            <div class="row" ng-repeat="field in fields">
+                <div class="col-sm-6 col-md-6 col-lg-6 main">
+                    <label for="text-field">{{field.label}}</label>
+                    <!--TEXT-->
+                    <div class="form-group" ng-if="field.type=='TEXT'">
+                        <input name="name" placeholder="{{field.placeholder}}" type="text" value="">
+                    </div>
+
+                    <!--TEXTAREA-->
+                    <div class="form-group" ng-if="field.type=='TEXTAREA'">
+                        <textarea cols="40" name="name" placeholder="{{field.placeholder}}" rows="8"></textarea>
+                    </div>
+
+                    <!--DATE-->
+                    <div class="form-group" ng-if="field.type=='DATE'">
+                        <input name="name" placeholder="{{field.placeholder}}" type="date" value="">
+                    </div>
+
+                    <!--OPTIONS-->
+                    <div class="form-group" ng-if="field.type=='OPTIONS'">
+                        <select class="form-control" name="sel">
+                            <option ng-repeat="option in field.options" value="{{option.value}}">
+                                {{option.label}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <!--CHECKBOXES-->
+                    <div class="form-group" ng-if="field.type=='CHECKBOXES'">
+                        <div class="checkbox" ng-repeat="option in field.options">
+                            <label><input type="checkbox" value="{{option.value}}">{{option.label}}</label>
+                        </div>
+                    </div>
+                    <!--RADIO-->
+                    <div class="form-group" ng-if="field.type=='RADIOS'">
+                        <div class="radio" ng-repeat="option in field.options">
+                            <label><input name="optradio" type="radio" value="{{option.value}}">{{option.label}}</label>
+                        </div>
+                    </div>
+                    <!--EMAIL-->
+                    <div class="form-group" ng-if="field.type=='EMAIL'">
+                        <input name="email" placeholder="{{field.placeholder}}" type="email" value="">
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <label for="mods-btn"></label><br>
+                    <div class="form-group">
+                        <button class="btn btn-danger" name="button" ng-click="deleteField(field)" type="button">
+                            <span aria-hidden="true" class="glyphicon glyphicon-remove image-button"></span>
+                        </button>
+                        <button class="btn btn-warning" name="button" ng-click="" type="button">
+                            <span aria-hidden="true" class="glyphicon glyphicon-pencil image-button"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 main">
+                    <label for="field-dropdown">Add New Field</label>
+                    <div class="form-group">
+                        <select class="form-control" name="field_dropdown" ng-model="fieldType">
+                            <option selected="selected">Single Line Text Field</option>
+                            <option>Multi Line Text Field</option>
+                            <option>Date Field</option>
+                            <option>Dropdown Field</option>
+                            <option>Checkboxes Field</option>
+                            <option>Radio Buttons Field</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 main">
+                    <label for="add-btn"></label>
+                    <div class="form-group">
+                        <button class="btn btn-success" ng-click="addField(fieldType)">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

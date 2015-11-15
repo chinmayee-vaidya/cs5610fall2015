@@ -8,7 +8,7 @@
         $scope.login = function() {
 
             //Validate user
-            UserService.findUserByUsernameAndPassword($scope.username, $scope.password, function(user) {
+            UserService.findUserByUsernameAndPassword($scope.username, $scope.password).then(function(user){
                 if (user !== null) {
                     $rootScope.user = user;
                     $location.path("/profile");

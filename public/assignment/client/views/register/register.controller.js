@@ -16,7 +16,7 @@
                     email: $scope.email
                 };
 
-                UserService.createUser(user, function(new_user) {
+                UserService.createUser(user).then(function(new_user){
                     $rootScope.user = new_user;
                     $location.path("/profile");
                 });

@@ -9,7 +9,7 @@
         <li ng-class="{'active': $location.url().indexOf('admin')!=-1}">
             <a href="#/admin">Admin</a>
         </li>
-        <li ng-class="{'active': $location.url().indexOf('form')!=-1}">
+        <li ng-class="{'active': $location.url().indexOf('form')!=-1 || $location.url().indexOf('fields')!=-1 }">
             <a href="#/form">Form</a>
         </li>
     </ul>
