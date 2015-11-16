@@ -10,6 +10,7 @@
             FieldService.getFieldsForForm($routeParams.formId ).then(function(fields) {
                 $scope.fields = fields;
             });
+			$rootScope.selected_form_id=$routeParams.formId;
         }
 
         $scope.addField = function(fieldType) {
