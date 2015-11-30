@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<!--register form-->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="card register-card elevation2 center-block">
+                <div class="form-header text-center">
+                    <h1 class="inverted-color">LOGIN</h1>
+                    <hr>
+                </div>
+                <div class="container-fluid form-container">
+                    <form class="form-horizontal">
+                        <hr>
+                        <div class="form-group">
+                            <label class="control-label" for="username">Username:</label>
+                            <input class="form-control form-text-input" id="username" ng-model="model.user.username" placeholder="Username" type="text" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="password">Password:</label>
+                            <input class="form-control form-text-input" id="password" ng-model="model.user.password" placeholder="Password" type="password" />
+                        </div>
+                        <br><hr>
+                        <div class="form-group">
+                            <button class="form-control btn btn-primary form-button" ng-click="model.login(model.user)" type="Login">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>

@@ -1,130 +1,161 @@
-/*
-* Base structure
-*/
-
-
-/* Move down content because we have a fixed navbar that is 50px tall */
-
 body {
-    padding-top: 50px;
+    background: #eee;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
-p {
-    width: 750px;
-}
-td {
-    white-space: nowrap;
-}
-
-/*
-* Global add-ons
-*/
-
-
-.sub-header {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-}
-
-/*
-* Top navigation
-* Hide default border to remove 1px line.
-*/
-
-.navbar-fixed-top {
-    border: 0;
-}
-
-/*
-* Sidebar
-*/
-
-
-/* Hide for mobile, show later */
-
-.sidebar {
-    display: none;
-}
-@media (min-width: 768px) {
-    .sidebar {
-        position: fixed;
-        top: 51px;
-        bottom: 0;
-        left: 0;
-        z-index: 1000;
-        display: block;
-        padding: 20px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        /* Scrollable contents if viewport is shorter than content. */
-        background-color: #f5f5f5;
-        border-right: 1px solid #eee;
-    }
-}
-
-/* Sidebar navigation */
-
-
-.nav-sidebar {
-    margin-right: -21px;
-    /* 20px padding + 1px border */
-    margin-bottom: 20px;
-    margin-left: -20px;
-}
-.nav-sidebar > li > a {
-    padding-right: 20px;
-    padding-left: 20px;
-}
-.nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus {
-    color: #fff;
-    background-color: #428bca;
-}
-
-/*
-* Main content
-*/
-
-.main {
-    padding: 20px;
-}
-@media (min-width: 768px) {
-    .main {
-        padding-right: 40px;
-        padding-left: 40px;
-    }
-}
-.main .page-header {
-    margin-top: 0;
-}
-
-/*
-* Placeholder dashboard ideas
-*/
-
-.placeholders {
-    margin-bottom: 30px;
-    text-align: center;
-}
-.placeholders h4 {
-    margin-bottom: 0;
-}
-.placeholder {
-    margin-bottom: 20px;
-}
-.placeholder img {
-    display: inline-block;
-    border-radius: 50%;
-}
-
-.image-button:hover{
+.nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
 }
-
-.image-holder{
-  width:100vw;
-  height:500px;
+.nav-padding{
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
-.fit-image{
-  width:100vw;
-  height:500px;
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+.transparency {
+    opacity: 0.8;
+}
+.transparency:hover {
+    opacity: 1.0;
+}
+.banner {
+    width: 100%;
+    height: auto;
+    min-height: 350px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.banner-image-home {
+    background-image: url(../images/banner_blurred.jpg);
+}
+.banner-image-restaurant {
+    background-image: url(../images/rest_banner.jpg);
+}
+.space-top-bottom {
+    padding-top: 200px;
+    padding-bottom: 200px;
+}
+.text-input {
+    height: 60px;
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 5px;
+    background: #eee;
+}
+.text-input:focus{
+    background: white;
+}
+.search-button {
+    height: 60px;
+    border: none;
+    border-radius: 1px;
+    background-color: #c0392b;
+    margin-top: 5px;
+}
+.card {
+    background: white;
+    margin-top: 20px;
+    z-index: 1;
+}
+.card-1 {
+    background: white;
+    
+}
+.first-card {
+    margin-top: -20px;
+}
+.register-card{
+    margin-top: 100px;
+}
+.card-list-item {
+    padding: 10px 20px 10px 20px;
+}
+.card-list-item img {
+    max-width: 50px;
+    max-height: 50px;
+}
+.card-list-item a {
+    text-decoration: none;
+    color: #333;
+}
+.card-heading {
+    padding: 20px 20px 10px 20px;
+}
+.subtitle {
+    font-size: 14px;
+    margin-top: -10px;
+}
+.subtext {
+    font-size: 10px;
+    margin-top: -10px;
+}
+.bottom-border {
+    border-bottom: 1px solid #ddd;
+}
+.left-bar {
+    margin-top: 20px;
+}
+.footer {
+    background: #c0392b;
+    min-height: 350px;
+    margin-top: -20px;
+    padding: 75px 100px 50px 100px;
+}
+.form-header{
+    padding: 10px 10px 10px 10px;
+    background-color: #c0392b;
+}
+.form-container{
+    padding: 40px 40px 20px 40px;
+}
+.form-text-input{
+    border-radius: 1px;
+    height: 50px;
+    background: #eee;
+}
+.form-text-input:focus{
+    color: #eee;
+    background-color: #c0392b;
+}
+.form-button{
+    height: 60px;
+    border-radius: 1px;
+    margin-top: 5px;
+}
+.navform-text{
+    border-radius: 1px;
+}
+.navform-text:focus{
+    color: #eee;
+    background-color: #c0392b;
+}
+.login-button{
+    border: none;
+    border-radius: 1px;
+    background-color: #c0392b;
+}
+/*elevation classes*/
+
+.elevation1 {
+    box-shadow: 0 1px 3px #999;
+}
+.elevation2 {
+    box-shadow: 0 2px 5px #999;
+}
+.elevation3 {
+    box-shadow: 0 5px 7px #999;
+}
+.inverted-color {
+    color: #eee;
+}
+.site-color-background{
+    background-color: #c0392b;
 }

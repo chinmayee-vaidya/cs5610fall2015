@@ -1,0 +1,31 @@
+<h1>Search Data</h1>
+<div class="container">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rating</th>
+
+                <th>Description</th>
+                <th>Photo</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="hotel in model.searches">
+
+                <td><a href="#/restaurant/business/{{hotel.id}}">{{hotel.name}}</a></td>
+                <td>{{hotel.rating}}</td>
+                <td><p>{{hotel.snippet_text}}</p></td>
+                <td><img src="{{hotel.image_url}}"/></td>
+
+
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+</div>

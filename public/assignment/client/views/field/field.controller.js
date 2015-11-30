@@ -3,17 +3,157 @@
     angular.module("FormBuilderApp")
         .controller("FieldController", FieldController);
 
-    function FieldController($scope, $location, $rootScope, $routeParams,  FieldService) {
-        $scope.fields = [];
+    function FieldController($scope, $location, $rootScope, $routeParams, FieldService) {
+        var model = this;
+        var uid = $routeParams["userId"];
+        var fid = $routeParams["formId"];
+        model.addField=addField;
+        model.deleteField=deleteField;
 
-        if ($routeParams.formId !== undefined) {
-            FieldService.getFieldsForForm($routeParams.formId ).then(function(fields) {
-                $scope.fields = fields;
-            });
-			$rootScope.selected_form_id=$routeParams.formId;
+
+
+        function init() {
+
+
+            if($rootScope.user===undefined)
+            {
+                $location.path("/form");
+            }
+
+
+
+
+
+                    FieldService.findFieldsForForm(fid)
+                    .then(function(field){
+                     // console.log("After init: ");
+                     // console.log(field);
+                     // console.log("All fields");
+                      //console.log(field[0].fields);
+                      model.fields=field[0].fields;
+
+                });
+
+
+
+
         }
 
-        $scope.addField = function(fieldType) {
+
+
+
+        init();
+
+        function deleteField(field)
+        {
+
+            FieldService.deleteFieldForm(fid,field)
+            .then(function(field){
+              model.fields=field.fields;
+
+        });
+
+        }
+
+        function addField(field){
+            //console.log("Field: ");
+            //console.log(field);
+            //console.log("Field Type: ");
+            //console.log(field.fieldType);
+
+
+                if(field.fieldType=== "TEXT")
+                {
+                    field.label="Single line text field";
+                    field.placeholder="New field";
+
+                }
+            else if(field.fieldType=== "TEXTAREA")
+                {
+                    field.label="Multiline text field";
+                    field.placeholder="New field";
+
+
+                }
+
+                else if(field.fieldType=== "DATE")
+                {
+                    field.label="New date field";
+                    field.placeholder="New field";
+
+
+                }
+
+                else if(field.fieldType=== "RADIO")
+                {
+                    field.label="New radio buttons";
+                    field.options= [{
+                        "label": "Option X",
+                        "value": "OPTION_X"
+                    }, {
+                        "label": "Option Y",
+                        "value": "OPTION_Y"
+                    }, {
+                        "label": "Option Z",
+                        "value": "OPTION_Z"
+                    }]
+
+
+
+                }
+                else if(field.fieldType=== "CHECKBOX")
+                {
+                    field.label="New check box";
+                    field.options=[{
+                        "label": "Option A",
+                        "value": "OPTION_A"
+                    }, {
+                        "label": "Option B",
+                        "value": "OPTION_B"
+                    }, {
+                        "label": "Option C",
+                        "value": "OPTION_C"
+                    }]
+
+
+
+                }
+
+                else if(field.fieldType=== "SELECT")
+                {
+                    field.label="New select field";
+                    field.options=[{
+                        "label": "Option D",
+                        "value": "OPTION_D"
+                    }, {
+                        "label": "Option E",
+                        "value": "OPTION_E"
+                    }, {
+                        "label": "Option F",
+                        "value": "OPTION_F"
+                    }]
+
+
+
+                }
+
+
+
+
+            //console.log("After updation");
+            //console.log(field);
+            FieldService.addFieldForm(fid,field)
+            .then(function(field){
+                //console.log("Returned");
+                //console.log(field);
+              model.fields=field.fields;
+
+        });
+
+        }
+
+
+        /*$scope.addField = function(fieldType) {
             switch (fieldType) {
                 case "Single Line Text Field":
                     {
@@ -23,7 +163,7 @@
                             "type": "TEXT",
                             "placeholder": "New Field"
                         };
-                        FieldService.createFieldForForm($rootScope.selected_form_id, obj_sl).then(function(response){
+                        FieldService.createFieldForForm($rootScope.selected_form_id, obj_sl).then(function(response) {
                             $scope.fields = response;
                         });
                         break;
@@ -36,7 +176,7 @@
                             "type": "TEXTAREA",
                             "placeholder": "New Field"
                         };
-                        FieldService.createFieldForForm($rootScope.selected_form_id, obj_ml).then(function(response){
+                        FieldService.createFieldForForm($rootScope.selected_form_id, obj_ml).then(function(response) {
                             $scope.fields = response;
                         });
                         break;
@@ -49,7 +189,7 @@
                             "label": "New Date Field",
                             "type": "DATE"
                         };
-                        FieldService.createFieldForForm($rootScope.selected_form_id, obj_dt).then(function(response){
+                        FieldService.createFieldForForm($rootScope.selected_form_id, obj_dt).then(function(response) {
                             $scope.fields = response;
                         });
                         break;
@@ -71,7 +211,7 @@
                                 "value": "OPTION_3"
                             }]
                         };
-                        FieldService.createFieldForForm($rootScope.selected_form_id, obj_dd).then(function(response){
+                        FieldService.createFieldForForm($rootScope.selected_form_id, obj_dd).then(function(response) {
                             $scope.fields = response;
                         });
                         break;
@@ -94,7 +234,7 @@
                                 "value": "OPTION_C"
                             }]
                         };
-                        FieldService.createFieldForForm($rootScope.selected_form_id, obj_cb).then(function(response){
+                        FieldService.createFieldForForm($rootScope.selected_form_id, obj_cb).then(function(response) {
                             $scope.fields = response;
                         });
                         break;
@@ -106,18 +246,17 @@
                             "label": "New Radio Buttons",
                             "type": "RADIOS",
                             "options": [{
-                                    "label": "Option X",
-                                    "value": "OPTION_X"
-                                }, {
-                                    "label": "Option Y",
-                                    "value": "OPTION_Y"
-                                }, {
-                                    "label": "Option Z",
-                                    "value": "OPTION_Z"
-                                }
-                            ]
+                                "label": "Option X",
+                                "value": "OPTION_X"
+                            }, {
+                                "label": "Option Y",
+                                "value": "OPTION_Y"
+                            }, {
+                                "label": "Option Z",
+                                "value": "OPTION_Z"
+                            }]
                         };
-                        FieldService.createFieldForForm($rootScope.selected_form_id, obj_rb).then(function(response){
+                        FieldService.createFieldForForm($rootScope.selected_form_id, obj_rb).then(function(response) {
                             $scope.fields = response;
                         });
                         break;
@@ -126,9 +265,9 @@
         };
 
         $scope.deleteField = function(field) {
-            FieldService.deleteFieldFromForm($rootScope.selected_form_id, field.id).then(function(response){
+            FieldService.deleteFieldFromForm($rootScope.selected_form_id, field.id).then(function(response) {
                 $scope.fields = response;
             });
-        };
+        };*/
     }
 })();

@@ -1,85 +1,136 @@
-module.exports = function(app) {
+var q = require("q");
+module.exports = function(mongoose, db) {
+        var UserSchema = require("./user.schema.js")(mongoose);
 
-    var users = require("./user.mock.json");
+        var UserModel = mongoose.model("UserModel", UserSchema);
 
-    var model = {
+        var api = {
 
-        create: create,
-        findAll: findAll,
-        findById: findById,
-        update: update,
-        delete: remove,
-        findUserByUsername: findUserByUsername,
-        findUserByCredentials: findUserByCredentials
+            create: create,
+            findAll: findAll,
+            findById: findById,
+            updateUser: updateUser,
+            deleteUser: deleteUser,
+            findUserByUsername: findUserByUsername,
+            findUserByCredentials: findUserByCredentials
 
-    };
-    return model;
+        };
+        return api;
 
+        function deleteUser(id) {
+            var deferred = q.defer();
 
-    function create(userObj) {
-        users.push(userObj);
-        return userObj;
-    }
+            UserModel.findByIdAndRemove(id, function(err, user) {
+                deferred.resolve(user);
 
-    function findAll() {
-        return users;
-    }
+            });
 
-    function findById(userId) {
-
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].id == userId) {
-                return users[i];
+                return deferred.promise;
             }
-        }
-        return null;
 
-    }
+            function create(user) {
+                var deferred = q.defer();
+                var uname = user._id;
 
-    function update(userID, updatedUserObject) {
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].id == userID) {
-                users[i] = updatedUserObject;
-                return users[i]
+                UserModel.create(user, function(err, user) {
+                    UserModel.find(function(err, users) {
+
+                        deferred.resolve(users);
+                    });
+                });
+
+                return deferred.promise;
             }
-        }
-        return null;
-    }
 
-    function remove(userID) {
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].id == userID) {
-                users.splice(i, 1);
-                return users;
+
+
+            function findAll() {
+                var deferred = q.defer();
+                UserModel.find(function(err, users) {
+                    deferred.resolve(users);
+
+                });
+                return deferred.promise;
+
             }
-        }
-        return users;
-    }
 
-    function findUserByUsername(username) {
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].username == username) {
-                return (users[i]);
+            function findById(userId) {
+
+
+                var deferred = q.defer();
+                //console.log("in model: " + userId);
+                UserModel.findById({
+                    _id: userId
+                }, function(err, user) {
+                    //console.log(user);
+                    deferred.resolve(user);
+
+                });
+
+                return deferred.promise;
+
+
             }
-        }
-        return null;
-    }
 
-    function findUserByCredentials(credentials) {
-        //credential is an object with members username and password
-        //dont pass 2 variables here as the specs mention a credential object
-        /*like this
-        credential = {
-            username: A,
-            password: a
-        };*/
+            function updateUser(id, user) {
+                //var _id = mongoose.Types.ObjectId.fromString(id1);
+                var deferred = q.defer();
+                var uname = user.username;
+                var pass = user.password;
+                var fname = user.firstName;
+                var lname = user.lastName;
+                var e = user.email;
 
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].username == credentials.username && users[i].password == credentials.password) {
-                return users[i];
+                UserModel.findById(id, function(err, user) {
+                    user.username = uname;
+                    user.password = pass;
+                    user.firstName = fname;
+                    user.lastName = lname;
+                    user.email = e;
+
+                    user.save(function(err, user) {
+                        //console.log("Server side: "+user);
+                        deferred.resolve(user);
+                    });
+                });
+
+                return deferred.promise;
             }
-        }
-        return null;
-    }
 
-};
+        
+
+            function findUserByUsername(name) {
+
+                var deferred = q.defer();
+                UserModel.find({
+                    username: name
+                }, function(err, user) {
+                    deferred.resolve(user);
+
+                });
+
+
+                return deferred.promise;
+
+
+            }
+
+            function findUserByCredentials(user) {
+
+
+
+                var deferred = q.defer();
+                UserModel.find({
+                    username: user.username,
+                    password: user.password
+                }, function(err, user) {
+
+                    deferred.resolve(user);
+
+                });
+
+                return deferred.promise;
+
+            }
+
+        };

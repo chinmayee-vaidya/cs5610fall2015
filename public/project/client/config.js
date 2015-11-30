@@ -1,53 +1,104 @@
 (function() {
     "use strict";
     angular
-        .module("Project")
+        .module("HotelApp")
         .config(Configure);
 
 
     function Configure($routeProvider) {
         $routeProvider
             .when("/home", {
-                templateUrl: "home/home.view.html"
+                templateUrl: "views/home/home.view.html",
+                controller: "HomeController",
+                controllerAs: "model"
             })
-            .when("/register", {
-                templateUrl: "register/register.view.html"
+            .when("/fields", {
+                templateUrl: "views/field/field.view.html"
             })
-            .when("/login", {
-                templateUrl: "login/login.view.html"
+            .when("/profile/:userId", {
+                templateUrl: "views/profile/profile.view.html",
+                controller: "ProfileController",
+                controllerAs: "model"
+            })
+
+        .when("/form/:userId", {
+                templateUrl: "views/form/form.view.html",
+                controller: "FormController",
+                controllerAs: "model"
+            })
+            .when("/home/:userId", {
+                templateUrl: "views/home/home.view.html"
+            })
+            .when("/admin/:userId", {
+                templateUrl: "admin.html"
+
             })
             .when("/profile", {
-                templateUrl: "profile/profile.view.html"
+                templateUrl: "views/profile/profile.view.html",
+                controller: "ProfileController",
+                controllerAs: "model"
             })
-            .when("/editprofile", {
-                templateUrl: "profile/profile.view.html"
+
+        .when("/register", {
+                templateUrl: "views/register/register.view.html",
+                controller: "RegisterController",
+                controllerAs: "model"
             })
-            .when("/pay", {
-                templateUrl: "pay/pay.view.html"
+            .when("/login", {
+                templateUrl: "views/login/login.view.html",
+                controller: "LoginController",
+                controllerAs: "model"
             })
-            .when("/contact", {
-                templateUrl: "ContactUs.html"
+            .when("/form", {
+                templateUrl: "views/form/form.view.html"
             })
-            .when("/editprofile", {
-                templateUrl: "profile/profile.view.html"
+            .when("/username", {
+                templateUrl: "views/profile/profile.view.html"
             })
-            .when("/reguserprof", {
-                templateUrl: "profile/reguserprofile.view.html"
+            .when("/logout", {
+                templateUrl: "logout.html"
             })
-            .when("/review", {
-                templateUrl: "review/review.view.html"
+            .when("/admin", {
+                templateUrl: "admin.html"
             })
-            .when("/restaurant", {
-                templateUrl: "restaurant/restaurant.view.html"
+            .when("/user/:userId/form/:formId/fields", {
+                templateUrl: "views/field/field.view.html",
+                controller: "FieldController",
+                controllerAs: "model"
             })
-            .when("/search", {
-                templateUrl: "search/search.view.html"
+
+        .when("/search", {
+            templateUrl: "restaurant.html"
+
+        })
+
+        .when("/search/type/:data", {
+                templateUrl: "views/search/search.view.html",
+                controller: "SearchController",
+                controllerAs: "model"
+
             })
-            .when("/home_login", {
-                templateUrl: "home/home_login.view.html"
+            .when("/restaurant/business/:bid", {
+                    templateUrl: "views/restaurant/restaurant.view.html",
+                    controller: "RestaurantController",
+                    controllerAs: "model"
+
+                })
+            .when("/search/place/:place", {
+                templateUrl: "views/search/search.view.html",
+                controller: "SearchController",
+                controllerAs: "model"
+
             })
-            .otherwise({
-                redirectTo: "home"
-            });
+            .when("/search/type/:data/place/:place", {
+                templateUrl: "views/search/search.view.html",
+                controller: "SearchController",
+                controllerAs: "model"
+
+            })
+
+        .otherwise({
+            redirectTo: "home"
+        });
     }
 })();

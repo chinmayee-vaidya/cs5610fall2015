@@ -1,45 +1,93 @@
-module.exports = function(app, model, db) {
+module.exports = function(app, model) {
 
-    var form_model = require("../models/form.model.js")(app);
+    app.get("/api/assignment/user/:userId/form", getFormsForUser);
+    app.get("/api/assignment/form/:formId", get);
+    app.get("/api/assignment/form", getAllForms);
+    app.post("/api/assignment/user/form", addForm);
+    app.delete("/api/assignment/user/:userId/form/:formId", deleteForm);
+    app.delete("/api/assignment/form/:formId", deleteData);
+    app.put("/api/assignment/form/:formId",updateForm);
 
-    app.get('/api/assignment/form', function(req, res) {
-        if (req.query.title !== undefined) {
-            res.json(form_model.findFormByTitle(req.query.title));
-        } else {
-            res.json(form_model.findAll());
-        }
-    });
-
-    app.get('/api/assignment/user/:userId/form', function(req, res) {
-        var userID = req.params.userId;
-        res.json(form_model.findFormsForUser(userID));
-    });
-
-    app.get('/api/assignment/form/:formId', function(req, res) {
-        var formId = req.params.formId;
-        res.json(form_model.findById(formId));
-
-    });
-
-    app.delete('/api/assignment/form/:formId', function(req, res) {
-        var index = req.params.formId;
-        res.json(form_model.remove(index));
-    });
-
-    app.post('/api/assignment/user/:userId/form', function(req, res) {
+    function updateForm(req,res){
 
         var form = req.body;
-        form.userId = req.params.userId;
-        res.json(form_model.create(form));
+        var fid = req.params.formId;
 
-    });
+        //console.log("sent req: "+user.username);
+        model.updateForm(fid, form).then(function(updated){
+            res.json(updated);
+        });
 
-    app.put('/api/assignment/form/:formId', function(req, res) {
+    }
+
+    function deleteData(req, res) {
+
+        var fid = req.params["formId"];
+        model
+            .del(fid)
+            .then(function(form) {
+                res.json(form);
+
+            })
+
+    }
+
+
+
+    function get(req, res) {
+        var fid = req.params["formId"];
+        model
+            .get(fid)
+            .then(function(form) {
+                res.json(form);
+
+            })
+    }
+
+    function getAllForms(req, res) {
+        model
+            .findAllForms()
+            .then(function(form) {
+                res.json(form);
+            })
+
+    }
+
+    function deleteForm(req, res) {
+        var fid = req.params["formId"];
+        var uid = req.params["userId"];
+
+        model
+            .deleteById(fid, uid)
+            .then(function(form) {
+                res.json(form);
+
+            })
+    }
+
+    function getFormsForUser(req, res) {
+        var userId = req.params["userId"];
+
+        model
+            .getFormByUser(userId)
+            .then(function(form) {
+                res.json(form);
+
+            });
+
+    }
+
+    function addForm(req, res) {
 
         var form = req.body;
-        var index = req.params.formId;
-        res.json(form_model.updateForm(index, form));
 
-    });
+        //console.log("Server32342");
+        //console.log(form);
+        model
+            .addForm(form)
+            .then(function(forms) {
+                res.json(forms);
+            });
 
-};
+    }
+}

@@ -12,7 +12,7 @@
         <div id="navigationbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right" ng-if="user !== undefined">
                 <li ng-class="{'active': $location.url().indexOf('username')!=-1}">
-                    <a href="#/username">{{user.username}}</a>
+                    <a href="#/profile/{{user._id}}">{{user.username}}</a>
                 </li>
                 <li ng-class="{'active': $location.url().indexOf('logout')!=-1}">
                     <a href="#/home" ng-click="logout()">Logout</a>

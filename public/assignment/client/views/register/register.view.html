@@ -1,36 +1,48 @@
-<div ng-controller="RegisterController">
-    <h1>Register</h1>
+<h1>Register</h1>
     <form class="form-horizontal">
         <div class="form-group">
             <label class="col-sm-2 col-md-2 col-lg-2 control-label" for="username1">Username:</label>
             <div class="col-sm-8 col-md-8 col-lg-8">
-                <input class="form-control" id="inputEmail3" ng-model="username" placeholder="Username" type="username">
+                <input class="form-control" id="inputEmail3" ng-model="model.user.username" placeholder="Username" type="username">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 col-md-2 col-lg-2 control-label" for="inputPassword3">Password:</label>
             <div class="col-sm-8 col-md-8 col-lg-8">
-                <input class="form-control" id="inputPassword3" ng-model="password" placeholder="Password" type="password">
+                <input class="form-control" id="inputPassword3" ng-model="model.user.password" placeholder="Password" type="password">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="verifyPassword4">Verify Password:</label>
             <div class="col-sm-8 col-md-8 col-lg-8">
-                <input class="form-control" id="inputVPassword3" ng-model="verify_password" placeholder="Verify Password" type="password">
+                <input class="form-control" id="inputVPassword3" ng-model="model.user.verify_password" placeholder="Verify Password" type="password">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 col-md-2 col-lg-2 control-label" for="email">Email:</label>
             <div class="col-sm-8 col-md-8 col-lg-8">
-                <input class="form-control" id="email3" ng-model="email" placeholder="Email" type="email">
+                <input class="form-control" id="email3" ng-model="model.user.email" placeholder="Email" type="email">
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-8 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-s-8 col-xs-offset-2">
-                <button class="btn btn-primary btn-lg btn-block" ng-click="register()" type="Register">Register</button>
+                <button class="btn btn-primary btn-lg btn-block" ng-click="model.addUser(model.user)" type="Register">Register</button>
             </div>
         </div>
     </form>
 
-</div>
+    <table class="table">
+
+      <tr ng-repeat="user in model.users">
+        <td>
+          <a href="#/user/{{user._id}}">
+          {{user._id}}</a>
+
+        </td>
+
+    </tr>
+
+    </table>
+
+    

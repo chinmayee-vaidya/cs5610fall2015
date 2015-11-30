@@ -1,24 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="Project">
+<html lang="en" ng-app="HotelApp">
+
 <head>
-  <title>Web Development Project_Chinmayee Vaidya</title>
-  <meta charset="UTF-8">
-  <link href="css/style.css" rel="stylesheet">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <title>CuizineBizz</title>
+
+    <link charset="utf-8" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link charset="utf-8" href="css/style.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://raw.githubusercontent.com/bettiolo/oauth-signature-js/master/dist/oauth-signature.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="app.js"></script>
     <script src="config.js"></script>
-    <script src="header/headercontroller.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="services/user.service.js"></script>
+    <script src="services/search.service.js"></script>
+    <script src="services/business.service.js"></script>
+    <script src="views/login/login.controller.js"></script>
+    <script src="views/register/register.controller.js"></script>
+    <script src="views/profile/profile.controller.js"></script>
+    <script src="views/search/search.controller.js"></script>
+    <script src="views/home/home.controller.js"></script>
+    <script src="views/restaurant/restaurant.controller.js"></script>
+
 </head>
+
 <body>
-  <div ng-include="'header/header.view.html'">
-    </div>
-    <div class="row">
-      <div class="container-fluid" ng-view></div>
-    </div>
+
+    <!--NAVBAR-->
+    <!-- Fixed navbar -->
+    <nav ng-include="'views/header/header.view.html'"></nav>
+    <!--END NAVBAR-->
+
+    <div ng-view></div>
+
+    <!--footer-->
+    <div ng-include="'views/footer/footer.view.html'"></div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

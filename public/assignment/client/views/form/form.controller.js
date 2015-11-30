@@ -3,48 +3,103 @@
     angular.module("FormBuilderApp")
         .controller("FormController", FormController);
 
-    function FormController($scope, $location, $rootScope, FormService) {
+    function FormController($scope, $location, $rootScope,$routeParams, FormService,UserService) {
 
-        $rootScope.form_list = [];
+        var model=this;
+        model.addForm=addForm;
+        model.updateForm=updateForm;
 
-        //get all forms for the user
-        if ($rootScope.user !== undefined) {
-            FormService.findAllFormsForUser($rootScope.user.id).then(function(forms) {
-                $rootScope.form_list = forms;
+        model.deleteForm=deleteForm;
+        model.selectForm=selectForm;
+        var uid=$routeParams["userId"];
+        //console.log("ID");
+        //console.log(uid);
+
+        function init()
+        {
+            if($rootScope.user===undefined)
+            {
+                $location.path("/form");
+            }
+            if(uid!==undefined)
+            {
+                model.forms=FormService.findFormsForUser(uid);
+
+                FormService.findFormsForUser(uid)
+                .then(function(form){
+                 // console.log("Inside all");
+                 // console.log(form);
+                  model.forms=form;
+
+            });
+            }
+
+
+        }
+
+        init();
+
+        function updateForm(form){
+            $rootScope.form_to_be_updated=form;
+        }
+
+
+
+
+        // add a new form
+        function addForm(form) {
+
+            if(form!==undefined)
+            {
+                form.userId=uid;
+                //console.log("In add : ");
+                //console.log(form);
+                FormService
+                .addForm(form)
+                .then(function(forms){
+                    model.forms=forms;
+                });
+
+            }
+
+
+        }
+
+        function deleteForm(form)
+        {
+            FormService
+            .deleteForm(form)
+            .then(function(forms)
+            {
+                model.forms=forms;
             });
         }
 
-        // add a new form
-        $scope.addForm = function() {
-            if ($scope.title !== undefined && $rootScope.user !== undefined) {
+        function selectForm(index)
+        {
+            if($rootScope.form_to_be_updated!=undefined){
+                var name=model.form.title;
+                var f=$rootScope.form_to_be_updated;
 
-                //get all user forms
-                if ($rootScope.form_list !== undefined) {
-                    var exists = 0;
-                    // loop through the user forms to see if the form exists
-                    for (var i = 0; i < $rootScope.form_list.length; i++) {
-                        if ($rootScope.form_list[i].title == $scope.title) {
-                            exists = 1;
-                            break;
-                        }
-                    }
+                console.log(f._id);
+                console.log(f);
+                f.title=name;
+                FormService.updateform(f._id,f).then(function(updated){
+                    //now set the models to new names
+                    //console.log(updated.length);
 
-                    if (exists != 1) {
-                        var new_form = {
-                            id: Guid.raw(),
-                            title: $scope.title
-                        };
-                        FormService.createFormForUser($rootScope.user.id, new_form).then(function(forms) {
-                            $rootScope.form_list = forms;
-                        });
-                    }
+                    $rootScope.form_to_be_updated=undefined;
 
-                }
+
+                });
+
             }
-        };
+
+        }
+
 
         // delete an existing form
-        $scope.deleteForm = function(form) {
+        /*$scope.deleteForm = function(form) {
             //delete the form
             FormService.deleteFormById(form.id).then(function(forms) {
                 //get all user forms
@@ -57,7 +112,7 @@
             $rootScope.selected_form_id = $rootScope.form_list[index].id;
             $scope.title = $rootScope.form_list[index].title;
         };
-
+*/
         //updateForm
 
     }

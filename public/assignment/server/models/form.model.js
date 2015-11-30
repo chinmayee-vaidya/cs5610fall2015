@@ -1,151 +1,204 @@
-module.exports = function(app) {
+var q = require("q");
 
-    var forms = require("./form.mock.json");
-    var model = {
+module.exports = function(mongoose, db) {
+    var FormSchema = require("./form.schema.js")(mongoose);
+    var FormModel = mongoose.model("FormModel", FormSchema);
 
-        create: create,
-        findAll: findAll,
-        findById: findById,
-        update: update,
-        remove: remove,
-        findFormByTitle: findFormByTitle,
-        findFormsForUser: findFormsForUser,
-        findAllFields: findAllFields,
-        findField: findField,
-        removeField: removeField,
-        createField: createField,
-        updateField: updateField
+    var api = {
+
+        getFormByUser: getFormByUser,
+        findAllForms: findAllForms,
+        addForm: addForm,
+        get: get,
+        del: del,
+        deleteById: deleteById,
+        formById: formById,
+        addFieldForForm: addFieldForForm,
+        deleteField: deleteField,
+        updateForm: updateForm
+
+
     };
-    return model;
+    return api;
 
-    function create(formObj) {
-        forms.push(formObj);
-        return findFormsForUser(formObj.userId);
+    function updateForm(fid, form) {
+
+        console.log('Here....');
+
+        var deferred = q.defer();
+        var new_form = form;
+        console.log(fid);
+        console.log(form);
+
+        FormModel.findByIdAndUpdate(fid, { $set:new_form}, function(err,form){
+
+            deferred.resolve(form);
+
+        });
+
+        return deferred.promise;
+
     }
 
-    function findAll() {
-        return forms;
+    function del(fid) {
+        var deferred = q.defer();
+
+        FormModel.findByIdAndRemove(fid, function(err, form) {
+            deferred.resolve(form);
+
+        });
+
+        return deferred.promise;
     }
 
-    function findById(formId) {
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                return forms[i];
+    function get(fid) {
+
+        var deferred = q.defer();
+        FormModel.find({
+            _id: fid
+        }, function(err, form) {
+
+            if (err) console.log(err);
+            deferred.resolve(form);
+
+        })
+
+        return deferred.promise;
+
+    }
+
+
+
+    function findAllForms() {
+
+        var deferred = q.defer();
+        FormModel.find(function(err, users) {
+            deferred.resolve(users);
+
+        });
+        return deferred.promise;
+
+
+    }
+
+    function deleteField(form, field) {
+        var deferred = q.defer();
+
+        FormModel.findById(form, function(err, form) {
+            form.fields.splice(field, 1);
+            form.save(function(err, form) {
+                deferred.resolve(form);
+            });
+        });
+
+        return deferred.promise;
+
+    }
+
+    function addFieldForForm(fid, field) {
+        var deferred = q.defer();
+        //console.log("In model: ");
+        //console.log(field);
+
+        FormModel.findById(fid, function(err, form) {
+            form.fields.push(field);
+            form.save(function(err, form) {
+                //console.log("After insertion: ");
+                //console.log(form.fields);
+                deferred.resolve(form);
+            });
+        });
+
+
+        return deferred.promise;
+    }
+
+    function formById(fid) {
+        var deferred = q.defer();
+        FormModel.find({
+            _id: fid
+        }, function(err, form) {
+
+            if (err) console.log(err);
+            deferred.resolve(form);
+
+        })
+
+        return deferred.promise;
+
+    }
+
+    function deleteById(fid, uid) {
+
+        //console.log("In model");
+
+        var deferred = q.defer();
+        //console.log("Model user id");
+        //console.log(uid);
+
+        FormModel.remove({
+            _id: fid
+        }, function(err, status) {
+            if (err) {
+                //console.log(err);
+            } else {
+                FormModel.find({
+                    userId: uid
+                }, function(err, forms) {
+                    if (err) console.log(err)
+                    deferred.resolve(forms);
+
+                });
             }
-        }
-        return null;
+        });
+
+        return deferred.promise;
     }
 
-    function update(formId, updatedFormObject) {
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                forms[i] = updatedFormObject;
-                break;
-            }
-        }
-        return findFormsForUser(updatedFormObject.userId);
+
+    function getFormByUser(uid) {
+
+        var deferred = q.defer();
+        FormModel.find({
+            userId: uid
+        }, function(err, form) {
+
+            deferred.resolve(form);
+
+        });
+
+        return deferred.promise;
+
+
     }
 
-    function remove(formId) {
-        var userId = null;
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                userId = forms[i].userId;
-                forms.splice(i, 1);
-                break;
-            }
-        }
-        return findFormsForUser(userId);
-    }
+    function addForm(form) {
 
-    function findFormByTitle(title) {
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].title == title) {
-                return forms[i];
-            }
-        }
-        return null;
-    }
+        var deferred = q.defer();
+        var uid = form.userId;
 
-    //Additional methods that I think are relevant
-    //Not changing the above as the specs dont allow.
-    function findFormsForUser(userId) {
-        var user_forms = [];
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].userId == userId) {
-                user_forms.push(forms[i]);
-            }
-        }
-        return user_forms;
-    }
+        //console.log("In model");
+        //console.log(form);
+        //console.log("User Id");
+        //console.log(uid);
+        FormModel.create(form, function(err, form) {
+            if (err) console.log(err);
+            //console.log("Added");
+            //console.log(form);
+            FormModel.find({
+                userId: uid
+            }, function(err, forms) {
+                //console.log("In user: " + users);
+                //console.log(user._id);
+                if (err) console.log(err)
+                    //console.log("Resoleve");
+                    //console.log(forms);
+                deferred.resolve(forms);
 
-    //return all fields in the form
-    function findAllFields(formId) {
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                return(forms[i].fields);
-            }
-        }
-        return null;
-    }
+            });
+        });
 
-    //return a single field
-    function findField(formId, fieldId){
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                for (var j = 0; j < forms[i].fields.length; j++){
-                    if(forms[i].fields[j].id == fieldId){
-                        return(forms[i].fields[j]);
-                    }
-                }
-            }
-        }
-        return null;
-    }
+        return deferred.promise;
 
-    //delete a field
-    function removeField(formId, fieldId){
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                for (var j = 0; j < forms[i].fields.length; j++){
-                    if(forms[i].fields[j].id == fieldId){
-                        forms[i].fields.splice(j, 1);
-                        return(forms[i].fields);
-                    }
-                }
-            }
-        }
-        return null;
     }
-
-    //create a new field
-    function createField(formId, field){
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                if (forms[i].fields === undefined){
-                    forms[i].fields = [field];
-                }else{
-                    forms[i].fields.push(field);
-                }
-                return forms[i].fields;
-            }
-        }
-        return null;
-    }
-
-    //update a field
-    function updateField(formId, fieldId, field){
-        for (var i = 0; i < forms.length; i++) {
-            if (forms[i].id == formId) {
-                for (var j = 0; j < forms[i].fields.length; j++){
-                    if(forms[i].fields[j].id == fieldId){
-                        forms[i].fields[j] = field;
-                        return findFormsForUser(forms[i].userId);
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
 };
