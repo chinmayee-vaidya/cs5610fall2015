@@ -1,0 +1,32 @@
+<div ng-controller="SidebarController">
+    <ul ng-if="user !== undefined" class="nav nav-sidebar">
+        <li ng-class="{'active': $location.url().indexOf('home')!=-1}">
+            <a href="#/home/{{user._id}}">Home</a>
+        </li>
+        <li ng-class="{'active': $location.url().indexOf('profile')!=-1}">
+            <a href="#/profile/{{user._id}}">Profile</a>
+        </li>
+        <li ng-class="{'active': $location.url().indexOf('admin')!=-1}">
+            <a href="#/admin/{{user._id}}">Admin</a>
+        </li>
+        <li ng-if="user !== undefined" ng-class="{'active': $location.url().indexOf('form')!=-1 || $location.url().indexOf('fields')!=-1 }">
+            <a href="#/form/{{user._id}}">Form</a>
+        </li>
+    </ul>
+
+    <ul ng-if="user === undefined" class="nav nav-sidebar">
+        <li ng-class="{'active': $location.url().indexOf('home')!=-1}">
+            <a href="#/home">Home</a>
+        </li>
+        <li ng-class="{'active': $location.url().indexOf('profile')!=-1}">
+            <a href="#/profile">Profile</a>
+        </li>
+        <li ng-class="{'active': $location.url().indexOf('admin')!=-1}">
+            <a href="#/admin">Admin</a>
+        </li>
+        <li ng-if="user === undefined" ng-class="{'active': $location.url().indexOf('form')!=-1 || $location.url().indexOf('fields')!=-1 }">
+            <a href="#/form">Form</a>
+        </li>
+
+    </ul>
+</div>
