@@ -13,8 +13,10 @@ module.exports = function(app, model) {
         var form = req.body;
         var fid = req.params.formId;
 
+
         //console.log("sent req: "+user.username);
         model.updateForm(fid, form).then(function(updated){
+            
             res.json(updated);
         });
 

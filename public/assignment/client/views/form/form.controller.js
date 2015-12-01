@@ -41,7 +41,7 @@
 
         function updateForm(form){
             $rootScope.form_to_be_updated=form;
-            console.log(form);
+            //console.log(form);
             model.form=form;
         }
 
@@ -85,12 +85,12 @@
 
                  $scope.selectedRow = index;
 
-                console.log(f._id);
-                console.log(f);
+
                 f.title=name;
                 FormService.updateform(f._id,f).then(function(updated){
                     //now set the models to new names
                     //console.log(updated.length);
+
 
                     $rootScope.form_to_be_updated=undefined;
                     model.form=undefined;

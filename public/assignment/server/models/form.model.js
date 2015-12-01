@@ -23,16 +23,16 @@ module.exports = function(mongoose, db) {
 
     function updateForm(fid, form) {
 
-
-
         var deferred = q.defer();
-        var new_form = form;
+        var form1=form;
 
+        FormModel.findById(fid, function(err, form) {
+            form.title=form1.title;
 
-        FormModel.findByIdAndUpdate(fid, { $set:new_form}, function(err,form){
-
-            deferred.resolve(form);
-
+            form.save(function(err, form) {
+                //console.log("Server side: "+user);
+                deferred.resolve(form);
+            });
         });
 
         return deferred.promise;
@@ -101,7 +101,7 @@ module.exports = function(mongoose, db) {
         FormModel.findById(fid, function(err, form) {
             form.fields.push(field);
             form.save(function(err, form) {
-                
+
                 deferred.resolve(form);
             });
         });
