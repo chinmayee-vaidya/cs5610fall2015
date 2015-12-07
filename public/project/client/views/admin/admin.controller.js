@@ -72,7 +72,7 @@
 
             function removeReview(review){
 
-                ReviewService.deleteReview(review)
+                ReviewService.deleteReview(review._id)
                 .then(function(rev){
 
 
