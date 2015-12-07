@@ -58,23 +58,63 @@
 
         }
 
-        function searchByTermAndPlace(search_term, place) {
+        function searchByTermAndPlace(search_term, place,value) {
 
             var deferred = $q.defer();
             var method = "GET";
             var url = "http://api.yelp.com/v2/search?callback=JSON_CALLBACK";
+            var params;
+            if(value===0){
+                params = {
+                   callback: 'angular.callbacks._0',
+                   location: place,
+                   limit: 10,
 
-            var params = {
-                callback: 'angular.callbacks._0',
-                location: place,
-                oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
-                oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
-                oauth_signature_method: "HMAC-SHA1",
-                oauth_timestamp: new Date().getTime(),
-                oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
-                term: search_term,
+                   oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
+                   oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
+                   oauth_signature_method: "HMAC-SHA1",
+                   oauth_timestamp: new Date().getTime(),
+                   oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+                   term: search_term,
 
-            };
+               };
+
+            }
+            else if(value===undefined){
+                params = {
+                   callback: 'angular.callbacks._0',
+                   location: place,
+                   limit: 10,
+
+                   oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
+                   oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
+                   oauth_signature_method: "HMAC-SHA1",
+                   oauth_timestamp: new Date().getTime(),
+                   oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+                   term: search_term,
+
+               };
+
+            }
+            else{
+
+                params = {
+                   callback: 'angular.callbacks._0',
+                   location: place,
+                   limit: 10,
+                   offset:value,
+                   oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
+                   oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
+                   oauth_signature_method: "HMAC-SHA1",
+                   oauth_timestamp: new Date().getTime(),
+                   oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+                   term: search_term,
+
+               };
+
+            }
+
+
             var consumerSecret = 'HrqvdDlChpNaOyobojXUTAR8Sus';
             var tokenSecret = 'DxAev56PBQ8KTrnkPbQ_mleWEUs';
             var signature = oauthSignature.generate(method, url, params, consumerSecret, tokenSecret, {
@@ -96,23 +136,63 @@
         }
 
 
-        function searchByPlace(search_term) {
+        function searchByPlace(search_term,value) {
 
             var deferred = $q.defer();
             var method = "GET";
             var url = "http://api.yelp.com/v2/search?callback=JSON_CALLBACK";
 
-            var params = {
-                callback: 'angular.callbacks._0',
-                location: search_term,
-                oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
-                oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
-                oauth_signature_method: "HMAC-SHA1",
-                oauth_timestamp: new Date().getTime(),
-                oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
-                term: "food",
+            var params;
 
-            };
+            if(value===undefined){
+                params = {
+                   callback: 'angular.callbacks._0',
+                   location: search_term,
+                   limit: 10,
+                   oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
+                   oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
+                   oauth_signature_method: "HMAC-SHA1",
+                   oauth_timestamp: new Date().getTime(),
+                   oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+                   term: "food",
+
+               };
+
+            }
+            else if(value===0){
+                params = {
+                   callback: 'angular.callbacks._0',
+                   location: search_term,
+                   limit: 10,
+                   oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
+                   oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
+                   oauth_signature_method: "HMAC-SHA1",
+                   oauth_timestamp: new Date().getTime(),
+                   oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+                   term: "food",
+
+               };
+
+            }
+            else{
+
+                params = {
+                   callback: 'angular.callbacks._0',
+                   location: search_term,
+                   limit: 10,
+                   offset:value,
+                   oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
+                   oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
+                   oauth_signature_method: "HMAC-SHA1",
+                   oauth_timestamp: new Date().getTime(),
+                   oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+                   term: "food",
+
+               };
+
+            }
+
+
             var consumerSecret = 'HrqvdDlChpNaOyobojXUTAR8Sus';
             var tokenSecret = 'DxAev56PBQ8KTrnkPbQ_mleWEUs';
             var signature = oauthSignature.generate(method, url, params, consumerSecret, tokenSecret, {
@@ -137,22 +217,65 @@
 
 
 
-        function searchByTerm(search_term) {
+        function searchByTerm(search_term,value) {
+            console.log("In model");
+            console.log(search_term);
+            console.log(value);
 
             var deferred = $q.defer();
             var method = "GET";
             var url = "http://api.yelp.com/v2/search?callback=JSON_CALLBACK";
+            var params=undefined;
+            if(value===undefined)
+            {
+                console.log("In zero");
+                 params = {
+                    callback: 'angular.callbacks._0',
+                    location: 'Boston',
+                    limit: 10,
+                    oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
+                    oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
+                    oauth_signature_method: "HMAC-SHA1",
+                    oauth_timestamp: new Date().getTime(),
+                    oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+                    term: search_term
+                };
 
-            var params = {
-                callback: 'angular.callbacks._0',
-                location: 'Boston',
-                oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
-                oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
-                oauth_signature_method: "HMAC-SHA1",
-                oauth_timestamp: new Date().getTime(),
-                oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
-                term: search_term
-            };
+            }
+
+            else if(value===0)
+            {
+                console.log("In zero");
+                 params = {
+                    callback: 'angular.callbacks._0',
+                    location: 'Boston',
+                    limit: 10,
+                    oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
+                    oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
+                    oauth_signature_method: "HMAC-SHA1",
+                    oauth_timestamp: new Date().getTime(),
+                    oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+                    term: search_term
+                };
+
+            }
+            else {
+                console.log("Not in zeero");
+                 params = {
+                    callback: 'angular.callbacks._0',
+                    location: 'Boston',
+                    limit: 10,
+                    offset:value,
+                    oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
+                    oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
+                    oauth_signature_method: "HMAC-SHA1",
+                    oauth_timestamp: new Date().getTime(),
+                    oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+                    term: search_term
+                };
+            }
+
+
             var consumerSecret = 'HrqvdDlChpNaOyobojXUTAR8Sus';
             var tokenSecret = 'DxAev56PBQ8KTrnkPbQ_mleWEUs';
             var signature = oauthSignature.generate(method, url, params, consumerSecret, tokenSecret, {

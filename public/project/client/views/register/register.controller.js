@@ -21,6 +21,7 @@
             {
                 if(user.username!==undefined && user.password!==undefined && user.verify_password!==undefined && user.password==user.verify_password && user.email!==undefined)
                 {
+                    user.points_collected=0;
 
                     UserService
                     .addUser(user)

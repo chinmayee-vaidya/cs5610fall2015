@@ -61,6 +61,8 @@
         }
 
         function deleteUserById (id){
+            console.log("Service delete user");
+            console.log(id);
 
             var deferred = $q.defer();
             $http.delete("/api/project/user/" + id).success(function(response){
@@ -70,6 +72,10 @@
         }
 
         function updateUser(id,user)  {
+
+            console.log("In user service");
+
+            console.log(user.reviewed);
 
             var deferred = $q.defer();
             $http.put("/api/project/user/" + id, user).success(function(response){

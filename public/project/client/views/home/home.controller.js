@@ -10,6 +10,11 @@
 
         function init() {
 
+            if($rootScope.user===undefined)
+            {
+                $location.path("/home");
+            }
+
             SearchService.searchByNumberAndTerm(1, "prawns")
                 .then(function(resp) {
                     model.hotel1 = resp.businesses[0];

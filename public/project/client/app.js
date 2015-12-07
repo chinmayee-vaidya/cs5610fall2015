@@ -1,5 +1,5 @@
 (function() {
     "use strict";
     angular
-        .module("HotelApp", ["ngRoute"]);
+        .module("HotelApp", ["ngRoute", "ngMap", "ui.bootstrap"]);
 })();
