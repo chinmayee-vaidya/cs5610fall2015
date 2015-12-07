@@ -1,48 +1,51 @@
-<h1>Register</h1>
-    <form class="form-horizontal">
-        <div class="form-group">
-            <label class="col-sm-2 col-md-2 col-lg-2 control-label" for="username1">Username:</label>
-            <div class="col-sm-8 col-md-8 col-lg-8">
-                <input class="form-control" id="inputEmail3" ng-model="model.user.username" placeholder="Username" type="username">
+<!DOCTYPE html>
+
+<!--register form-->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="card register-card elevation2 center-block">
+                <div class="form-header text-center site-color-background">
+                    <h1 class="inverted-color">REGISTER</h1>
+                    <hr>
+                </div>
+                <div class="container-fluid form-container">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label" for="firstName">First Name:</label>
+                            <input class="form-control form-text-input" id="firstname" ng-model="model.user.firstName" placeholder="First Name" type="text" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="lastName">Last Name:</label>
+                            <input class="form-control form-text-input" id="lastname" ng-model="model.user.lastName" placeholder="Last Name" type="text" />
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="control-label" for="username">Username:</label>
+                            <input class="form-control form-text-input" id="username" ng-model="model.user.username" placeholder="Username" type="text" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="password">Password:</label>
+                            <input class="form-control form-text-input" id="password" ng-model="model.user.password" placeholder="Password" type="password" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="confpassword">Confirm Password:</label>
+                            <input class="form-control form-text-input" id="confpassword" ng-model="model.user.verify_password" placeholder="Verify Password" type="password" />
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="control-label" for="email">Email:</label>
+                            <input class="form-control form-text-input" id="email" ng-model="model.user.email" placeholder="Email" type="email" />
+                        </div>
+                        <br><hr>
+                        <div class="form-group">
+                            <button class="form-control btn btn-primary form-button" ng-click="model.register(model.user)" type="Register">Register</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 col-md-2 col-lg-2 control-label" for="inputPassword3">Password:</label>
-            <div class="col-sm-8 col-md-8 col-lg-8">
-                <input class="form-control" id="inputPassword3" ng-model="model.user.password" placeholder="Password" type="password">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="verifyPassword4">Verify Password:</label>
-            <div class="col-sm-8 col-md-8 col-lg-8">
-                <input class="form-control" id="inputVPassword3" ng-model="model.user.verify_password" placeholder="Verify Password" type="password">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 col-md-2 col-lg-2 control-label" for="email">Email:</label>
-            <div class="col-sm-8 col-md-8 col-lg-8">
-                <input class="form-control" id="email3" ng-model="model.user.email" placeholder="Email" type="email">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-8 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-s-8 col-xs-offset-2">
-                <button class="btn btn-primary btn-lg btn-block" ng-click="model.addUser(model.user)" type="Register">Register</button>
-            </div>
-        </div>
-    </form>
-
-    <table class="table">
-
-      <tr ng-repeat="user in model.users">
-        <td>
-          <a href="#/user/{{user._id}}">
-          {{user._id}}</a>
-
-        </td>
-
-    </tr>
-
-    </table>
-
-    
+        <div class="col-lg-2"></div>
+    </div>
+</div>

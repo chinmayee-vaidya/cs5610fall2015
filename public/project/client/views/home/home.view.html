@@ -1,4 +1,229 @@
-<h1>Welcome !</h1>
-<p class="text-justify">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+<!DOCTYPE html>
+<!--banner image-->
+<div class="container-fluid banner banner-image-home">
+    <div class=" container-fluid center-block space-top-bottom">
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-3 hidden-md hidden-sm hidden-xs"></div>
+            <div class="col-lg-6 container-fluid">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <input ng-model="model.searchData.type" class="form-control text-input center-block" name="search" value="" placeholder="Italian, Chinese, Spicy ..." type="text" />
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <input ng-model="model.searchData.city" class="form-control text-input center-block" name="search" value="" placeholder="Enter city, state....." type="text" />
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <button ng-click="model.search(model.searchData)" class="btn btn-info search-button center-block form-control" type="button" name="button">
+                            <span class="glyphicon glyphicon-search"></span> Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 hidden-md hidden-sm hidden-xs"></div>
+        </div>
+    </div>
+</div>
+<!--end banner image-->
+<!--content-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3 hidden-sm hidden-xs hidden-md">
+            <div class="container-fluid left-bar">
+                <div class="card-list-item bottom-border">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
+                            <img src="images/breakfast_logo.jpg" class="img-circle pull-left">
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <a href="#/search/type/breakfast">
+                                <h4>Breakfast</h4>
+                                <p class="subtext"><i>Start of your day with a healthy breakfast</i></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-list-item bottom-border">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
+                            <img src="images/lunch_logo.jpg" class="img-circle pull-left">
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <a href="#/search/type/lunch">
+
+                                <h4>Lunch</h4>
+                                <p class="subtext"><i>Have something tasty for lunch</i></p>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-list-item bottom-border">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
+                            <img src="images/dinner_logo.jpg" class="img-circle pull-left">
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+
+                            <a href="#/search/type/dinner">
+
+                                <h4>Dinner</h4>
+                                <p class="subtext"><i>Be happy with a happy dinner</i></p>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-list-item bottom-border">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
+                            <img src="images/take_away_logo.jpg" class="img-circle pull-left">
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <a href="#/search/type/takeaway">
+                                <h4>Take Away</h4>
+                                <p class="subtext"><i>Quick take away</i></p>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-list-item bottom-border">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
+                            <img src="images/delivery_logo.jpg" class="img-circle pull-left">
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <a href="#/search/type/delivery">
+                                <h4>Delivery</h4>
+                                <p class="subtext"><i>Awesome food at your doorstep</i></p>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card first-card elevation2">
+                <div class="card-heading">
+                    <img class="img img-responsive" src="images/item_banner1.jpg" alt="">
+                    <a href="#/restaurant/business/{{model.hotel1.id}}">
+                        <h2>{{model.hotel1.name}}</h2>
+                        <h4 class="subtitle">{{model.hotel1.addr}}</h4>
+                        <h4><i>{{model.hotel1.desc}}</i></h4>
+                    </a>
+                </div>
+            </div>
+            <div class="card elevation2">
+                <div class="card-heading">
+                    <img class="img img-responsive" src="images/item_banner2.jpg" alt="">
+                    <a href="#/restaurant/business/{{model.hotel2.id}}">
+                        <h2>{{model.hotel2.name}}</h2>
+                        <h4 class="subtitle">{{model.hotel2.addr}}</h4>
+                        <h4><i>{{model.hotel2.desc}}</i></h4>
+                    </a>
+                </div>
+            </div>
+            <div class="card elevation2">
+                <div class="card-heading">
+                    <img class="img img-responsive" src="images/item_banner3.jpg" alt="">
+                    <a href="#/restaurant/business/{{model.hotel3.id}}">
+                        <h2>{{model.hotel3.name}}</h2>
+                        <h4 class="subtitle">{{model.hotel3.addr}}</h4>
+                        <h4><i>{{model.hotel3.desc}}</i></h4>
+                    </a>
+                </div>
+            </div>
+            <div class="card elevation2">
+                <div class="card-heading">
+                    <img class="img img-responsive" src="images/item_banner4.jpg" alt="">
+                    <a href="#/restaurant/business/{{model.hotel4.id}}">
+                        <h2>{{model.hotel4.name}}</h2>
+                        <h4 class="subtitle">{{model.hotel4.addr}}</h4>
+                        <h4><i>{{model.hotel4.desc}}</i></h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3 hidden-sm hidden-xs hidden-md">
+            <div class="container-fluid left-bar">
+                <div class="card-list-item bottom-border">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
+                            <img src="images/coffee_logo.jpg" class="img-circle pull-left">
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <a href="#/search/type/coffee">
+                                <h4>Coffee</h4>
+                                <p class="subtext"><i>Energise yourself with a lovely sip</i></p>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-list-item bottom-border">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
+                            <img src="images/drinks_logo.jpg" class="img-circle pull-left">
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+
+                            <a href="#/search/type/drinks">
+
+                                <h4>Drinks</h4>
+                                <p class="subtext"><i>Party all night</i></p>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-list-item bottom-border">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
+                            <img src="images/donuts_logo.jpg" class="img-circle pull-left">
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+
+                            <a href="#/search/type/donuts">
+
+                                <h4>Donuts</h4>
+                                <p class="subtext"><i>Grab a donut</i></p>
+
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-list-item bottom-border">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
+                            <img src="images/pizza_logo.jpg" class="img-circle pull-left">
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <a href="#/search/type/pizza">
+
+                                <h4>Pizza</h4>
+                                <p class="subtext"><i>Yummmm pizza waiting for you.</i></p>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-list-item bottom-border">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
+                            <img src="images/pasta_logo.jpg" class="img-circle pull-left">
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+
+                            <a href="#/search/type/pasta">
+                                <h4>Pasta</h4>
+                                <p class="subtext"><i>When nothing but pasta makes you happy</i></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end content-->

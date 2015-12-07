@@ -1,125 +1,282 @@
-/*
-* Base structure
-*/
-
-
-/* Move down content because we have a fixed navbar that is 50px tall */
-
 body {
-    padding-top: 50px;
+    background: #eee;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
-p {
-    width: 750px;
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
 }
-
-.selected {
-    background-color:black;
-    color:white;
-    font-weight:bold;
+.transparency {
+    opacity: 0.8;
 }
-
-td {
-    white-space: nowrap;
+.transparency:hover {
+    opacity: 1.0;
 }
-
-/*
-* Global add-ons
-*/
-
-.sub-header {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+.banner {
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
 }
-
-/*
-* Top navigation
-* Hide default border to remove 1px line.
-*/
-
-.navbar-fixed-top {
-    border: 0;
+.banner-image-home {
+    background-image: url(../images/banner_blurred.jpg);
 }
-
-/*
-* Sidebar
-*/
-
-
-/* Hide for mobile, show later */
-
-.sidebar {
-    display: none;
+.banner-image-restaurant {
+    background-image: url(../images/rest_banner.jpg);
 }
-@media (min-width: 768px) {
-    .sidebar {
-        position: fixed;
-        top: 51px;
-        bottom: 0;
-        left: 0;
-        z-index: 1000;
-        display: block;
-        padding: 20px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        /* Scrollable contents if viewport is shorter than content. */
-        background-color: #f5f5f5;
-        border-right: 1px solid #eee;
-    }
+.space-top-bottom {
+    padding-top: 200px;
+    padding-bottom: 200px;
+}
+.text-input {
+    height: 60px;
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 5px;
+    background: #eee;
+}
+.text-input:focus {
+    background: white;
+}
+.search-button {
+    height: 60px;
+    border: none;
+    border-radius: 1px;
+    background-color: #c0392b;
+    margin-top: 5px;
+}
+.card {
+    background: white;
+    margin-top: 20px;
+    z-index: 1;
 }
 
-/* Sidebar navigation */
-
-.nav-sidebar {
-    margin-right: -21px;
-    /* 20px padding + 1px border */
-    margin-bottom: 20px;
-    margin-left: -20px;
-}
-.nav-sidebar > li > a {
-    padding-right: 20px;
-    padding-left: 20px;
-}
-.nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus {
-    color: #fff;
-    background-color: #428bca;
+.card {
+    background: white;
+    margin-top: 5px;
+    z-index: 1;
 }
 
-/*
-* Main content
-*/
+.card12 {
+    background: white;
+    margin-top: 20px;
+    z-index: 1;
+    margin-bottom: 40px;
+}
+.card a {
+    text-decoration: none;
+    color: #333;
+}
+.card a:hover {
+    text-decoration: none;
+    color: #c0392b;
+}
+.first-card {
+    margin-top: -20px;
+}
+.register-card {
+    margin-top: 100px;
+}
+.card-list-item {
+    padding: 10px 20px 10px 20px;
+}
+.card-list-item img {
+    max-width: 50px;
+    max-height: 50px;
+}
+.card-list-item a {
+    text-decoration: none;
+    color: #333;
+}
+.card-heading {
+    padding: 20px 20px 10px 20px;
+}
+.subtitle {
+    font-size: 14px;
+    margin-top: -10px;
+}
+.subtext {
+    margin-top: -10px;
+}
+.bottom-border {
+    border-bottom: 1px solid #ddd;
+}
+.left-bar {
+    margin-top: 20px;
+}
+.footer {
+    background: #c0392b;
+    min-height: 200px;
+    margin-top: -20px;
+    padding: 75px 100px 50px 100px;
+}
+.form-header {
+    padding: 10px 10px 10px 10px;
+}
+.form-container {
+    padding: 40px 40px 20px 40px;
+}
+.form-text-input {
+    border-radius: 1px;
+    height: 50px;
+    background: #eee;
+}
+.form-text-input:focus {
+    color: #eee;
+    background-color: #c0392b;
+}
+.form-button {
+    height: 60px;
+    border-radius: 1px;
+    margin-top: 5px;
+}
+.navform-text {
+    border-radius: 1px;
+}
+.navform-text:focus {
+    color: #eee;
+    background-color: #c0392b;
+}
+.login-button {
+    border: none;
+    border-radius: 1px;
+    background-color: #c0392b;
+}
 
-.main {
+/*elevation classes*/
+
+.elevation1 {
+    box-shadow: 0 1px 3px #999;
+}
+.elevation2 {
+    box-shadow: 0 2px 5px #999;
+}
+.elevation3 {
+    box-shadow: 0 5px 7px #999;
+}
+
+/*-------------------------*/
+
+.inverted-color {
+    color: #eee;
+}
+.dark-color {
+    color: #222;
+}
+.site-color-background {
+    background-color: #c0392b;
+}
+.site-color {
+    color: #c0392b;
+}
+.search-header {
+    padding: 60px 0 20px 0;
+}
+.search-image {
+    width: 100%;
+    height: 100%;
+}
+.search-content {
+    padding: 15px;
+}
+.search-result a{
+    text-decoration: none;
+}
+.search-result:hover {
+    background-color: #c0392b;
+    color: #eee;
+}
+.search-result:hover a{
+    color: #eee;
+}
+.big-square-button {
+    border: none;
+    min-height: 50px;
+    border-radius: 0;
+    box-shadow: none;
+}
+.blended-button {
+    background-color: #eee;
+}
+.blended-button:hover {
+    background-color: white;
+}
+.pagination {
     padding: 20px;
 }
-@media (min-width: 768px) {
-    .main {
-        padding-right: 40px;
-        padding-left: 40px;
-    }
+.bottom-edge {
+    bottom: 0;
+    margin-bottom: -100px;
 }
-.main .page-header {
-    margin-top: 0;
+.map-container {
+    height: 400px;
 }
-
-/*
-* Placeholder dashboard ideas
-*/
-
-.placeholders {
-    margin-bottom: 30px;
+.restaurant-header {
+    height: auto;
+    padding-bottom: 20px;
+}
+.restaurant-logo-image {
+    width: 200px;
+    height: 200px;
+    margin-top: -50px;
+    border: 10px solid #c0392b;
+}
+.big-bold {
+    font-size: 64px;
+    font-weight: bold;
+}
+.review {
+    padding: 20px;
+}
+.review1 {
+    padding-left: 5px;
+    padding-right:5px;
+    padding-top:5px;
+}
+.review-textarea {
+    border: none;
+    border-radius: 1px;
+    max-width: 100%;
+    min-width: 100%;
+    margin-bottom: 20px;
+    background-color: #eee;
+}
+.review-textarea:focus {
+    color: #eee;
+    background-color: #c0392b;
+}
+.profile-header {
+    padding: 100px 0 50px 0;
+}
+.profile-photo {
+    max-width: 200px;
+}
+.profile-details {
+    padding-top: 25px;
+}
+.user-stats {
+    padding-top: 20px;
     text-align: center;
 }
-.placeholders h4 {
-    margin-bottom: 0;
-}
-.placeholder {
-    margin-bottom: 20px;
-}
-.placeholder img {
-    display: inline-block;
-    border-radius: 50%;
+.custom-bars {
+    border-radius: 0;
+    height: 5px;
 }
 
-.image-button:hover{
-    cursor: pointer;
+.function-button{
+    margin-left: 5px;
+    min-width: 100px;
+}
+/* Small devices (tablets, 768px and up) */
+
+@media (max-width: 768px) {
+    .profile-header {
+        text-align: center;
+    }
 }

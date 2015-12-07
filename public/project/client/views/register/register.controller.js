@@ -1,15 +1,16 @@
 (function() {
     "use strict";
-    angular.module("FormBuilderApp")
+    angular.module("HotelApp")
         .controller("RegisterController", RegisterController);
 
     function RegisterController($scope, $location, $rootScope, UserService) {
 
         var model=this;
-        model.addUser=addUser;
+        model.register=addUser;
 
         function init(){
           model.users=UserService.findAllUsers();
+          console.log(model.users);
 
         }
         init();
@@ -20,6 +21,7 @@
             {
                 if(user.username!==undefined && user.password!==undefined && user.verify_password!==undefined && user.password==user.verify_password && user.email!==undefined)
                 {
+                    user.points_collected=0;
 
                     UserService
                     .addUser(user)
