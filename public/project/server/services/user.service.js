@@ -2,7 +2,7 @@ module.exports = function(app, model) {
 
     var user_model = model;
 
-    app.get('/api/project/user', function(req, res) {
+    app.get('/api/assignment/user', function(req, res) {
         if (req.query.username !== undefined) {
             if (req.query.password !== undefined) {
                 //return user which mathces username and password
@@ -41,7 +41,7 @@ module.exports = function(app, model) {
 
     });
 
-    app.get('/api/project/user/:id', function(req, res) {
+    app.get('/api/assignment/user/:id', function(req, res) {
         var userId = req.params.id;
         //console.log("Extracted: "+userId);
         user_model.findById(userId).then(function(user){
@@ -50,35 +50,18 @@ module.exports = function(app, model) {
         });
     });
 
-/*
-    app.delete('/api/assignment/user/:id', function(req, res) {
-        var index = req.params.id;
-        res.json(user_model.remove(index));
-    });
-*/
 
-app.delete('/api/project/user/:id', function(req, res) {
-    console.log("server side delete");
-    var userId = req.params.id;
-
-    //console.log("sent req: "+user.username);
-    user_model.deleteUser(userId).then(function(updated){
-        res.json(updated);
-    });
-});
-    app.post('/api/project/user', function(req, res) {
+    app.post('/api/assignment/user', function(req, res) {
         var user = req.body;
-        //console.log("Display"+user);
+
         user_model.create(user).then(function(users){
-            //console.log(users);
+
             res.json(users);
         });
     });
 
-    app.put('/api/project/user/:id', function(req, res) {
-        console.log("Server service");
+    app.put('/api/assignment/user/:id', function(req, res) {
         var user = req.body;
-        console.log(user);
         var userId = req.params.id;
         user.id = userId;
         //console.log("sent req: "+user.username);
@@ -86,5 +69,15 @@ app.delete('/api/project/user/:id', function(req, res) {
             res.json(updated);
         });
     });
+
+    app.delete('/api/assignment/user/:id', function(req, res) {
+        var userId = req.params.id;
+        user.id = userId;
+        //console.log("sent req: "+user.username);
+        user_model.deleteUser(userId).then(function(updated){
+            res.json(updated);
+        });
+    });
+
 
 };

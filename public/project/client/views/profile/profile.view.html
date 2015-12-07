@@ -1,121 +1,46 @@
 <!DOCTYPE html>
-<div class="banner site-color-background elevation2">
-    <div class="container">
-        <div class="row profile-header">
-
-            <div class="inverted-color profile-details">
-                <h1 class="big">{{model.current_name}}</h1>
-                <h4 class="subtext"><i>{{user.bio}}</i></h4>
-                <p>User since {{model.dte}}
-                    <br><b>Points Collected: </b><i>{{model.user.points_collected}}</i></p>
-                <div class="progress custom-bars">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:20%">
-                    </div>
-                    <div class="progress-bar progress-bar-warning" role="progressbar" style="width:20%">
-                    </div>
-                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:20%">
-                    </div>
-                    <div class="progress-bar progress-bar-info" role="progressbar" style="width:20%">
-                    </div>
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:15%">
-                    </div>
-                </div>
+<div>
+    <h1>Profile</h1>
+    <hr />
+    <h2 ng-if="user === undefined">Please <a href="#/login">Login</a>/<a href="#/register">Register</a> to view profile</h2>
+    <form class="form-horizontal" ng-if="model.user!==undefined" ng-controller="ProfileController">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="username1">Username:</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="inputEmail3" ng-model="model.user.username" placeholder="Username" type="username">
             </div>
         </div>
-    </div>
-</div>
-<!--content-->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-4">
-
-            <div class="card elevation1">
-                <div class="container-fluid">
-                    <h3 class="site-color">My Details</h3>
-                    <hr>
-                    <div>
-                        <form class="form-horizontal" ng-controller="ProfileController">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="username1">Username:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control form-text-input" id="inputEmail3" ng-model="model.user.username" placeholder="Username" type="username">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="inputPassword3">Password:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control form-text-input" id="inputPassword3" ng-model="model.user.password" placeholder="Password" type="password">
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="firstname">First Name:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control form-text-input" id="inputfirstname3" ng-model="model.user.firstName" placeholder="First Name" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="lastname">Last Name:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control form-text-input" id="inputlastname3" ng-model="model.user.lastName" placeholder="Last Name" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="bio">Bio:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control form-text-input" id="bio" ng-model="model.user.bio" placeholder="Bio" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label" for="email">Email:</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control form-text-input" id="email3" ng-model="model.user.email" placeholder="Email" type="email">
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <button class="btn btn-primary big-square-button site-color-background form-control" ng-click="model.updateData(model.user)" type="Update">Update</button>
-                                </div>
-                            </div>
-
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!--
-            <div class="card elevation1">
-                <div class="container-fluid">
-                    <h3 class="site-color">Recently Visited</h3>
-                    <hr>
-                    <img class="img img-responsive" src="images/item_banner1.jpg" alt="">
-                    <a href="#/restaurant/business/{{model.hotel1.id}}">
-                        <h2>Chinu's Delicious Foodery</h2>
-                        <h4 class="subtitle">143 Park Drive, Boston MA</h4>
-                        <h4><i>Awesome food from an awesome person</i></h4>
-                    </a>
-                </div>
-            </div>-->
-        </div>
-        <div class="col-lg-8">
-            <div class="card elevation1">
-                <div class="site-color-background">
-                    <div class="container-fluid">
-                        <h2 class="inverted-color">Recent Reviews Posted</h2>
-                        <hr>
-                    </div>
-                </div>
-                <div class="container-fluid">
-                    <div ng-repeat="rev in model.reviews" class="container review">
-                        <h2>{{rev.hotel_name}}</h2>
-                        <textarea class="form-control review-textarea" name="name" ng-model="rev.review_text"></textarea>
-                        <button class="btn btn-primary big-square-button site-color-background pull-right function-button" ng-click="model.updateReview(rev)">Update</button>&nbsp;
-                        <button class="btn btn-primary big-square-button site-color-background pull-right function-button" ng-click="model.deleteReview(rev)">Delete</button>
-                    </div>
-
-                </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputPassword3">Password:</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="inputPassword3" ng-model="model.user.password" placeholder="Password" type="password">
             </div>
         </div>
-    </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="firstname">First Name:</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="inputfirstname3" ng-model="model.user.firstName" placeholder="First Name" type="first-name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="lastname">Last Name:</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="inputlastname3" ng-model="model.user.lastName" placeholder="Last Name" type="lastname-name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="email">Email:</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="email3" ng-model="model.user.email" placeholder="Email" type="email">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <button class="btn btn-primary btn-lg btn-block" ng-click="model.update(model.user)" type="Update">Update</button>
+            </div>
+        </div>
+
+
+    </form>
 </div>

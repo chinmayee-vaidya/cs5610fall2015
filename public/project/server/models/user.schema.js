@@ -5,23 +5,10 @@ module.exports=function(mongoose){
         password: String,
         firstName: String,
         lastName: String,
-        email: String,
-        bio:String,
-        created: {type: Date, default: Date.now},
-        votedByMe:[{
-            hotel_id:String
-        }],
-        reviewed:[
-            {
-                hotel_id:String
-
-            }
-        ],
-
-        points_collected:{ type: Number, min: 0, max: 500}
+        email: String
 
     }, {
-        collection: "cs5610.project.user",
+        collection: "cs5610.assignment.user",
 
     });
 

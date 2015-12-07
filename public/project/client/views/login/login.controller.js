@@ -1,6 +1,6 @@
 (function() {
     "use strict";
-    angular.module("HotelApp")
+    angular.module("FormBuilderApp")
         .controller("LoginController", LoginController);
 
     function LoginController($scope, $location, $rootScope, UserService) {
@@ -13,28 +13,16 @@
             var password=model.user.password;
 
             UserService.findUserByUsernameAndPassword(username, password).then(function(user){
-                if(user[0]===undefined)
-                {
-                    model.user.username="";
-                    model.user.password="";
-                    alert("Enter proper user credentials!!!");
+                //console.log(user[0]);
+                if (user !== null) {
+                    $rootScope.user = user[0];
+                    //console.log("Login"+user);
+                    var current=user[0];
+                    //console.log("Current");
+                    //console.log(current);
+                    var uid=current._id;
+                    $location.path("/profile/"+uid);
                 }
-
-                else{
-
-                    console.log(user[0]);
-                    if (user !== null) {
-                        $rootScope.user = user[0];
-                        //console.log("Login"+user);
-                        var current=user[0];
-                        console.log("Current");
-                        console.log(current);
-                        var uid=current._id;
-                        $location.path("/profile/"+uid);
-                    }
-
-                }
-
             });
         }
 
