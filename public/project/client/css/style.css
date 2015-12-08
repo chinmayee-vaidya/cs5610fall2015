@@ -56,18 +56,9 @@ body {
     margin-top: 20px;
     z-index: 1;
 }
-
-.card {
-    background: white;
-    margin-top: 5px;
-    z-index: 1;
-}
-
-.card12 {
-    background: white;
-    margin-top: 20px;
-    z-index: 1;
-    margin-bottom: 40px;
+.card-padding{
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 .card a {
     text-decoration: none;
@@ -268,10 +259,39 @@ body {
     border-radius: 0;
     height: 5px;
 }
-
 .function-button{
     margin-left: 5px;
     min-width: 100px;
+}
+.borderless{
+    border: none;
+}
+
+.more-button:hover{
+    background-color: white;
+    color: #c0392b;
+    cursor: pointer;
+}
+.button-div{
+    display: inline-block;
+    padding: 5px;
+}
+.vote-button-up{
+    background-color: white;
+    color: #4caf50;
+    cursor: pointer;
+}
+.vote-button-down{
+    background-color: white;
+    color: #f44336;
+    cursor: pointer;
+}
+
+.vote-button-up:hover{
+    color: #1b5e20;
+}
+.vote-button-down:hover{
+    color: #d50000;
 }
 /* Small devices (tablets, 768px and up) */
 

@@ -75,16 +75,18 @@
                 ReviewService.deleteReview(review._id)
                 .then(function(rev){
 
+                    ReviewService.findAllReviews ()
+                    .then(function(review){
+                      model.reviews=review;
+
+                });
+
+
 
             });
 
 
 
-            ReviewService.findAllReviews ()
-            .then(function(review){
-              model.reviews=review;
-
-        });
 
 
 

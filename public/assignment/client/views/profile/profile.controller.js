@@ -3,7 +3,7 @@
     angular.module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope,$rootScope, $routeParams,$location,UserService,ReviewService) {
+    function ProfileController($scope,$rootScope, $routeParams,$location,UserService) {
 
         var model=this;
 
@@ -22,8 +22,6 @@
                 UserService.getUserById(userId)
                 .then(function(user){
                   model.user=user;
-
-
 
             });
 

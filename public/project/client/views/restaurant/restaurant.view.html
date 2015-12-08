@@ -18,7 +18,7 @@
                 <div class="inverted-color">
                     <h1>{{model.current.name}}</h1>
                     <p class="subtext"><i>{{model.addr}}</i></p>
-                    <uib-rating ng-model="model.rating" readonly="true" titles="['one','two','three']"></uib-rating>
+                    <uib-rating ng-model="model.rating" readonly="true"></uib-rating>
                 </div>
             </div>
         </div>
@@ -34,17 +34,24 @@
     <div class="row">
         <div class="col-lg-8">
 
-            <div class="card elevation1">
-                <div ng-repeat="rev in model.curr_review" class="container-fluid review1">
-                    <h4>{{rev.review_text}}</h4>
-
-                    <p class="pull-right">-{{rev.firstName}}</p>
-                    <button class="btn btn-default" type="submit" ng-click="model.upvote(rev)">Upvote</button>
-                    {{rev.upvotes}}
-                    <button class="btn btn-default" type="submit" ng-click="model.downvote(rev)">Downvote</button>
-                    {{rev.downvotes}}
+            <div class="card elevation1 card-padding">
+                <div ng-repeat="rev in model.curr_review" class="container-fluid">
+                    <div class="container-fluid">
+                        <uib-rating ng-model="rev.rating" readonly="true"></uib-rating>
+                        <h4>{{rev.review_text}}</h4>
+                        <p class="pull-right">-{{rev.firstName}}</p>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="button-div vote-button-up" type="submit" ng-click="model.upvote(rev)">
+                            <span class="glyphicon glyphicon-thumbs-up"></span> {{rev.upvotes}}</div>
+                        <div class="button-div vote-button-down" type="submit" ng-click="model.downvote(rev)">
+                            <span class="glyphicon glyphicon-thumbs-down"></span> {{rev.downvotes}}
+                        </div>
+                    </div>
                     <hr>
-
+                </div>
+                <div>
+                    <div class="text-center more-button">Load More</div>
                 </div>
             </div>
 
@@ -55,24 +62,11 @@
                 <div class="form-header">
                     <h3 class="container-fluid site-color">Been to {{model.current.name}}? Write a review below!</h3>
                 </div>
-                <div class="row">
-                <div class="col-lg-4 col-lg-offset-1 main">
-                    <label for="field-dropdown">Rate the restaurant:</label>
-                    <div class="form-group">
-                        <select class="form-control" name="field_dropdown" ng-model="model.review.rating">
-                            <option ng-value="5" selected="selected">5</option>
-                            <option ng-value="4">4</option>
-                            <option ng-value="3">3</option>
-                            <option ng-value="2">2</option>
-                            <option ng-value="1">1</option>
-                            <option ng-value="0">0</option>
-                        </select>
-                    </div>
-                </div></div>
                 <div class="review">
+                    <label for="user_rating">Rating: </label>
+                    <uib-rating class="site-color" ng-model="model.review.rating" readonly="false"></uib-rating>
                     <form class="form-horizontal">
-                        <label for="user_raing">Write Review</label>
-                        <textarea class="form-control review-textarea" name="name" rows="8" cols="40" ng-model="model.review.review_text"></textarea>
+                        <textarea placeholder="Write a review!" class="form-control review-textarea" name="name" rows="8" cols="40" ng-model="model.review.review_text"></textarea>
                         <button class="btn btn-primary big-square-button site-color-background form-control" ng-click="model.addReview(model.review)">Submit Review</button>
                     </form>
                 </div>
