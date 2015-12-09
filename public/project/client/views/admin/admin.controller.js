@@ -75,13 +75,27 @@
 
         function addUser(user) {
 
-            UserService
-                .addUser(user)
-                .then(function(users) {
+            user.points_collected = 0;
+            user.votedByMe = [];
+            user.reviewed = [];
 
-                    model.users = users;
+            if (user.firstName === undefined || user.lastName === undefined || user.username === undefined || user.password === undefined) {
+                alert("Incomplete data to add a new user");
+            } else {
 
-                });
+
+                UserService
+                    .addUser(user)
+                    .then(function(users) {
+
+                        model.users = users;
+
+                    });
+
+            }
+
+
+
 
         }
 
@@ -145,8 +159,8 @@
         }
 
         function removeReview(review) {
-            var h=review.hotel_id;
-            var r=review._id;
+            var h = review.hotel_id;
+            var r = review._id;
 
             ReviewService.deleteReview(review._id)
                 .then(function(rev) {
@@ -163,82 +177,79 @@
                 });
 
 
-                //console.log("In delete revvvvvvvvvvvvvvvvvsss");
-                var users=model.users;
-                //console.log(users);
-                var key=true;
-                for(var i=0;i<users.length;i++){
+            //console.log("In delete revvvvvvvvvvvvvvvvvsss");
+            var users = model.users;
+            //console.log(users);
+            var key = true;
+            for (var i = 0; i < users.length; i++) {
 
 
 
-                    var current=users[i];
+                var current = users[i];
 
-                    //console.log("Current user under consideration...");
+                //console.log("Current user under consideration...");
 
-                    //console.log(current);
-                    var rv_list=current.reviewed;
-                    var vo_list=current.votedByMe;
-                    //console.log("Rootscope");
-                    //console.log($rootScope.user);
+                //console.log(current);
+                var rv_list = current.reviewed;
+                var vo_list = current.votedByMe;
+                //console.log("Rootscope");
+                //console.log($rootScope.user);
 
-                    for(var j=0;j<rv_list.length;j++){
-                        var curr=rv_list[j];
-                        if(curr.hotel_id===h){
-                            rv_list.splice(j,1);
-                            current.reviewed=rv_list;
-                            //console.log("Being changed");
+                for (var j = 0; j < rv_list.length; j++) {
+                    var curr = rv_list[j];
+                    if (curr.hotel_id === h) {
+                        rv_list.splice(j, 1);
+                        current.reviewed = rv_list;
+                        //console.log("Being changed");
+                        //console.log(current);
+
+                        if (current._id === $rootScope.user._id) {
+                            //console.log("Changing the value of rootscope...");
+                            $rootScope.user = current;
+                            //console.log($rootScope.user);
+                            //console.log("Review delete");
                             //console.log(current);
 
-                            if(current._id===$rootScope.user._id)
-                            {
-                                //console.log("Changing the value of rootscope...");
-                                $rootScope.user=current;
-                                //console.log($rootScope.user);
-                                //console.log("Review delete");
-                                //console.log(current);
-
-                            }
-                            UserService.updateUser(current._id, current).then(function(updated) {
-                                //now set the models to new names
-                                ////console.log(updated.length);
-
-                            })
-                            key=false;
-                            break;
                         }
+                        UserService.updateUser(current._id, current).then(function(updated) {
+                            //now set the models to new names
+                            ////console.log(updated.length);
 
+                        })
+                        key = false;
+                        break;
                     }
 
-
-
-                    for(var k=0;k<vo_list.length;k++){
-                        var curr1=vo_list[k];
-                        if(curr1.hotel_id===r)
-                        {
-                            vo_list.splice(k,1);
-                            current.votedByMe=vo_list;
-                            if(current._id===$rootScope.user._id)
-                            {
-                                $rootScope.user=current;
-                            }
-                            UserService.updateUser(current._id, current).then(function(updated) {
-                                //now set the models to new names
-                                ////console.log(updated.length);
-
-                            })
-                            key=false;
-                            break;
-                        }
-
-                    }
-
-                    UserService.findAllUsers()
-                        .then(function(user) {
-                            //console.log(user);
-                            model.users = user;
-
-                        });
                 }
+
+
+
+                for (var k = 0; k < vo_list.length; k++) {
+                    var curr1 = vo_list[k];
+                    if (curr1.hotel_id === r) {
+                        vo_list.splice(k, 1);
+                        current.votedByMe = vo_list;
+                        if (current._id === $rootScope.user._id) {
+                            $rootScope.user = current;
+                        }
+                        UserService.updateUser(current._id, current).then(function(updated) {
+                            //now set the models to new names
+                            ////console.log(updated.length);
+
+                        })
+                        key = false;
+                        break;
+                    }
+
+                }
+
+                UserService.findAllUsers()
+                    .then(function(user) {
+                        //console.log(user);
+                        model.users = user;
+
+                    });
+            }
 
 
 

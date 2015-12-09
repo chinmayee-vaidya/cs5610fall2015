@@ -23,15 +23,17 @@
                 .editReview(rev._id, rev)
                 .then(function(review) {
 
+                    ReviewService.getReviewByUserId(userId)
+                        .then(function(review) {
+                            model.reviews = review;
+                            //console.log(review);
+
+                        });
+
                 });
 
 
-            ReviewService.getReviewByUserId(userId)
-                .then(function(review) {
-                    model.reviews = review;
-                    //console.log(review);
 
-                });
 
 
         }

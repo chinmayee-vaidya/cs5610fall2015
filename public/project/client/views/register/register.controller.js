@@ -37,6 +37,8 @@
             if (user !== undefined) {
                 if (user.username !== undefined && user.password !== undefined && user.verify_password !== undefined && user.password == user.verify_password && user.email !== undefined) {
                     user.points_collected = 0;
+                    user.votedByMe=[];
+                    user.reviewed=[];
 
                     UserService
                         .addUser(user)
