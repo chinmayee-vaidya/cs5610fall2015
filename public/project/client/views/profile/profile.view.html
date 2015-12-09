@@ -5,19 +5,19 @@
 
             <div class="inverted-color profile-details">
                 <h1 class="big">{{model.current_name}}</h1>
-                <h4 class="subtext"><i>{{user.bio}}</i></h4>
+                <h4 class="subtext"><i>{{model.user.bio}}</i></h4>
                 <p>User since {{model.dte}}
-                    <br><b>Points Collected: </b><i>{{model.user.points_collected}}</i></p>
-                <div class="progress custom-bars">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:20%">
+                    <br><b>Level {{model.user.foodie_level}} Foodie. Points Collected: </b><i>{{model.user.points_collected}}</i></p>
+                <div id="level_progress" class="progress custom-bars">
+                    <div id="level1progress" class="progress-bar progress-bar-danger" role="progressbar">
                     </div>
-                    <div class="progress-bar progress-bar-warning" role="progressbar" style="width:20%">
+                    <div id="level2progress" class="progress-bar progress-bar-warning" role="progressbar">
                     </div>
-                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:20%">
+                    <div id="level3progress" class="progress-bar progress-bar-success" role="progressbar">
                     </div>
-                    <div class="progress-bar progress-bar-info" role="progressbar" style="width:20%">
+                    <div id="level4progress" class="progress-bar progress-bar-info" role="progressbar">
                     </div>
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:15%">
+                    <div id="level5progress" class="progress-bar" role="progressbar">
                     </div>
                 </div>
             </div>
@@ -106,12 +106,23 @@
                         <hr>
                     </div>
                 </div>
-                <div class="container-fluid">
-                    <div ng-repeat="rev in model.reviews" class="container review">
+                <div class="container-fluid review">
+                    <div ng-repeat="rev in model.reviews" class="container-fluid">
                         <h2>{{rev.hotel_name}}</h2>
-                        <textarea class="form-control review-textarea" name="name" ng-model="rev.review_text"></textarea>
-                        <button class="btn btn-primary big-square-button site-color-background pull-right function-button" ng-click="model.updateReview(rev)">Update</button>&nbsp;
-                        <button class="btn btn-primary big-square-button site-color-background pull-right function-button" ng-click="model.deleteReview(rev)">Delete</button>
+                        <uib-rating class="site-color" ng-model="rev.rating" readonly="false"></uib-rating>
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <textarea msd-elastic class="form-control edit-review-textarea" name="name" ng-model="rev.review_text"></textarea>
+                                <p class="site-color"><i>*Click on the review to edit it.</i></p>
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-success box-button" ng-click="model.updateReview(rev)"><span class="glyphicon glyphicon-ok"></span></button>
+
+                                <button class="btn btn-danger box-button" ng-click="model.deleteReview(rev)"><span class="glyphicon glyphicon-remove"></span></button>
+                            </div>
+                        </div>
+
+
                     </div>
 
                 </div>

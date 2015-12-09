@@ -3,11 +3,11 @@
     <div class="container search-header">
         <div class="row">
             <div class="col-lg-8">
-                <h1 class="inverted-color pull-left" ng-if="model.place==undefined">Showing results for "{{model.display}}"</h1>
+                <h3 class="inverted-color pull-left" ng-if="model.place==undefined">Showing results for "{{model.display}}"</h3>
 
             </div>
             <div class="col-lg-4">
-                <h3 class="inverted-color pull-right">{{model.start}} - {{model.end}}  out of 50</h3>
+                <h3 class="inverted-color pull-right">{{model.start}} - {{model.end}} out of 50</h3>
             </div>
         </div>
     </div>
@@ -22,9 +22,16 @@
                     <img class="img img-responsive img-thumbnail search-image" src="{{hotel.image_url}}" />
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7">
-                        <a href="#/restaurant/business/{{hotel.id}}"><h3>{{hotel.name}}</h3></a>
+                    <a href="#/restaurant/business/{{hotel.id}}">
+                        <h3>{{hotel.name}}</h3>
+                        <uib-rating ng-model="hotel.rating" readonly="true"></uib-rating>
+                        <p><i>
+                            <span ng-repeat="category in hotel.categories">{{category[0]}}{{$last ? '' : ',&nbsp;'}} </span>
+                        </i>
+                        </p>
+                    </a>
                     <i>
-                        <h4><!--<span class="glyphicon glyphicon-star"></span>--><img src="{{hotel.rating_img_url}}"> {{hotel.rating}} </h4>
+                        <h4></h4>
                     </i>
                     <p>{{hotel.snippet_text}}</p>
                 </div>
@@ -37,15 +44,15 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-3"></div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 container-fluid">
             <div class="row">
-                <div class="col-lg-6 col-md-6 pagination">
-                    <button class="btn btn-primary big-square-button form-control site-color-background" ng-class="{'disabled dark-color': isFirst}" name="button" type="button" ng-click="model.goPrev()" ng-disabled="isFirst">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pagination-button top-button">
+                    <button class="btn btn-primary big-square-button form-control site-color-background pagination-button" ng-class="{'disabled dark-color': isFirst}" name="button" type="button" ng-click="model.goPrev()" ng-disabled="isFirst">
                         <h4>&lt; Previous</h4>
                     </button>
                 </div>
-                <div class="col-lg-6 col-md-6 pagination">
-                    <button class="btn btn-primary big-square-button form-control site-color-background" ng-class="{'disabled dark-color': isLast}" ng-click="model.goNext()" name="button" type="button" ng-disabled="isLast">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pagination-button">
+                    <button class="btn btn-primary big-square-button form-control site-color-background pagination-button" ng-class="{'disabled dark-color': isLast}" ng-click="model.goNext()" name="button" type="button" ng-disabled="isLast">
                         <h4>Next &gt;</h4>
                     </button>
                 </div>

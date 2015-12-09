@@ -11,7 +11,8 @@ module.exports = function(mongoose, db) {
         getReviewByUser:getReviewByUser,
         getReviewByHotelId:getReviewByHotelId,
         deleteById:deleteById,
-        updateReview:updateReview
+        updateReview:updateReview,
+        deleteByUserId:deleteByUserId
 
 
 
@@ -19,6 +20,10 @@ module.exports = function(mongoose, db) {
 
     };
     return api;
+
+    function deleteByUserId(id){
+        
+    }
 
     function updateReview(fid,review){
 

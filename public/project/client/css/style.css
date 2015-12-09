@@ -106,6 +106,7 @@ body {
     min-height: 200px;
     margin-top: -20px;
     padding: 75px 100px 50px 100px;
+    z-index: -999;
 }
 .form-header {
     padding: 10px 10px 10px 10px;
@@ -198,8 +199,10 @@ body {
 .blended-button:hover {
     background-color: white;
 }
-.pagination {
-    padding: 20px;
+
+.pagination-button {
+    padding-top: 20px;
+    padding-bottom: 50px;
 }
 .bottom-edge {
     bottom: 0;
@@ -225,11 +228,6 @@ body {
 .review {
     padding: 20px;
 }
-.review1 {
-    padding-left: 5px;
-    padding-right:5px;
-    padding-top:5px;
-}
 .review-textarea {
     border: none;
     border-radius: 1px;
@@ -239,6 +237,22 @@ body {
     background-color: #eee;
 }
 .review-textarea:focus {
+    color: #eee;
+    background-color: #c0392b;
+}
+.edit-review-textarea {
+    border: none;
+    border-radius: 1px;
+    outline: none;
+    max-width: 100%;
+    min-width: 100%;
+    background-color: white;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    border-style: none;
+}
+.edit-review-textarea:focus {
     color: #eee;
     background-color: #c0392b;
 }
@@ -258,6 +272,7 @@ body {
 .custom-bars {
     border-radius: 0;
     height: 5px;
+    box-shadow: none;
 }
 .function-button{
     margin-left: 5px;
@@ -275,16 +290,15 @@ body {
 .button-div{
     display: inline-block;
     padding: 5px;
+    cursor: pointer
 }
 .vote-button-up{
     background-color: white;
     color: #4caf50;
-    cursor: pointer;
 }
 .vote-button-down{
     background-color: white;
     color: #f44336;
-    cursor: pointer;
 }
 
 .vote-button-up:hover{
@@ -293,10 +307,29 @@ body {
 .vote-button-down:hover{
     color: #d50000;
 }
+.box-button{
+    border-radius: 1px;
+    border: none;
+}
+.admin-top-right-pane{
+    min-width: 150px;
+    margin-left: -15px;
+}
+.review-user{
+    display: inline-block;
+    padding: 5px 50px 5px 10px;
+    margin-right: -40px;
+}
+.full-height{
+    height: 75vh;
+}
 /* Small devices (tablets, 768px and up) */
 
 @media (max-width: 768px) {
     .profile-header {
         text-align: center;
+    }
+    .top-button{
+        padding-bottom: 0px;
     }
 }

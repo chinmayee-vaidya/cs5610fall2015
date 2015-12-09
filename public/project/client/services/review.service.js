@@ -11,15 +11,26 @@
             getReviewByHotelId:getReviewByHotelId,
             editReview:editReview,
             deleteReview:deleteReview,
-            addReview:addReview
+            addReview:addReview,
+            deleteByUserId:deleteByUserId
 
 
 
         };
         return api;
 
+        function deleteByUserId(id){
+
+            var deferred = $q.defer();
+            $http.delete("/api/project/user/"+id+"review").success(function(response){
+                deferred.resolve(response);
+            });
+            return deferred.promise;
+
+        }
+
         function findAllReviews  (){
-            console.log("Reached");
+            //console.log("Reached");
             var deferred = $q.defer();
             $http.get("/api/project/review").success(function(response){
                 deferred.resolve(response);
@@ -41,7 +52,7 @@
         function addReview(review){
             var deferred = $q.defer();
             $http.post("/api/project/review", review).success(function(response){
-                //console.log("In users.ser"+response[0]);
+                ////console.log("In users.ser"+response[0]);
                 deferred.resolve(response);
 
 
@@ -74,12 +85,12 @@
 
 
         function deleteReview(review){
-            console.log("In delete reviewwwwwwwwwwwwww");
-            console.log(review);
+            //console.log("In delete reviewwwwwwwwwwwwww");
+            //console.log(review);
 
             var deferred=$q.defer();
 
-            //console.log(fid);
+            ////console.log(fid);
 
 
             $http.delete("/api/project/review/"+ review).success(function(response) {
@@ -117,7 +128,7 @@
 
             var deferred = $q.defer();
             $http.post("/api/project/user", user).success(function(response){
-                console.log("In users.ser"+response[0]);
+                //console.log("In users.ser"+response[0]);
                 deferred.resolve(response);
 
 

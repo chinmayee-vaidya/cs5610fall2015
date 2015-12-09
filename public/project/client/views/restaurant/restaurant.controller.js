@@ -11,6 +11,84 @@
         model.addReview = addReview;
         model.upvote = upvote;
         model.downvote = downvote;
+        model.revLenNotZero = revLenNotZero;
+        model.revZero = revZero;
+        model.incrNum = incrNum;
+
+        function incrNum() {
+
+
+            ReviewService
+                .getReviewByHotelId(resId)
+                .then(function(review) {
+                    console.log("Reviews updated");
+                    if(review.length<model.rev_len)
+                    {
+                        if((model.rev_len-review.length)===0)
+                            model.rev_len = model.rev_len + 5;
+
+                    }
+                    else{
+                            model.rev_len = model.rev_len + 5;
+                    }
+
+                    var r1 = [];
+                    var count = 0;
+
+                    for (var i = 0; i < review.length; i++) {
+                        if (count === model.rev_len) {
+                            break;
+                        } else {
+                            r1.push(review[i]);
+                        }
+
+                    }
+
+
+
+                    model.reviews = r1;
+
+
+                    model.curr_review = r1;
+
+                });
+
+
+        }
+
+
+
+        function revZero() {
+            if (model.reviews === undefined)
+                return true;
+            else if (model.reviews.length == 0)
+                return true;
+
+
+            else {
+                return false;
+            }
+        }
+
+        function revsBefore() {
+            if (model.reviews === undefined)
+                return false;
+            else if (model.reviews.length > 0 && model.reviews.length < 5)
+                return true;
+            else {
+                return false;
+            }
+        }
+
+        function revLenNotZero() {
+            if (model.reviews === undefined)
+                return false;
+            else if (model.reviews.length > 4)
+                return true;
+            else {
+                return false;
+            }
+        }
 
         function upvote(review) {
 
@@ -73,8 +151,31 @@
                         .editReview(id, review)
                         .then(function(review) {
 
-                            model.reviews = review;
-                            console.log(review);
+                            ReviewService
+                                .getReviewByHotelId(resId)
+                                .then(function(review) {
+
+                                    var r1 = [];
+                                    var count = 0;
+
+                                    for (var i = 0; i < review.length; i++) {
+                                        if (count === model.rev_len) {
+                                            break;
+                                        } else {
+                                            r1.push(review[i]);
+                                        }
+
+                                    }
+
+
+
+                                    model.reviews = r1;
+
+
+                                    model.curr_review = r1;
+
+                                });
+
 
 
 
@@ -92,6 +193,119 @@
                                 console.log("Updated");
                                 console.log(user);
 
+                            });
+
+                        });
+
+                }
+
+            }
+        }
+
+        function downvote(review) {
+
+
+            if ($rootScope.user === undefined) {
+                alert("You need to login to vote");
+                $location.path("/login");
+            } else {
+
+                //model.upCount=review.upvotes;
+                var id = review._id;
+
+                var key = false;
+                var revs_user = $rootScope.user.votedByMe;
+                console.log("Revs");
+                console.log(revs_user);
+                for (var i = 0; i < revs_user.length; i++) {
+
+                    if (revs_user[i].hotel_id === review._id) {
+                        key = true;
+                        break;
+                    }
+
+                }
+
+                if (key === true) {
+                    alert("You cannot revote");
+                } else {
+
+                    review.downvotes = review.downvotes + 1;
+
+                    var updated_user = $rootScope.user;
+                    console.log("Updated user");
+                    console.log(updated_user);
+                    var new_res = {
+                        hotel_id: review._id
+                    }
+
+                    updated_user.votedByMe.push(new_res);
+                    console.log(updated_user);
+                    console.log("Rootscope user111111111111111111");
+                    console.log($rootScope.user);
+                    console.log($rootScope.user._id);
+                    UserService.updateUser($rootScope.user._id, updated_user).then(function(updated) {
+                        //now set the models to new names
+                        //console.log(updated.length);
+                        console.log("11222");
+                        console.log(updated);
+                        console.log("Updated");
+                        console.log(updated);
+
+                        model.user = updated;
+                        $rootScope.user = updated;
+
+
+
+                    });
+
+
+                    ReviewService
+                        .editReview(id, review)
+                        .then(function(review) {
+
+                            ReviewService
+                                .getReviewByHotelId(resId)
+                                .then(function(review) {
+
+                                    var r1 = [];
+                                    var count = 0;
+
+                                    for (var i = 0; i < review.length; i++) {
+                                        if (count === model.rev_len) {
+                                            break;
+                                        } else {
+                                            r1.push(review[i]);
+                                        }
+
+                                    }
+
+
+
+                                    model.reviews = r1;
+
+
+                                    model.curr_review = r1;
+
+                                });
+
+
+
+
+                        });
+
+                    UserService.getUserById(review.user_id)
+                        .then(function(user) {
+                            console.log(user);
+                            var current = user;
+                            current.points_collected = current.points_collected - 5;
+                            UserService.updateUser(current._id, current).then(function(updated) {
+
+
+                                model.user = updated;
+                                console.log("Updated");
+                                console.log(user);
+
 
 
                             });
@@ -101,118 +315,9 @@
 
 
                         });
-
-
-
-
-
-
                 }
-
-
-
-
-
-
-
-
-
-
             }
-
         }
-
-        function downvote(review) {
-
-
-                        if ($rootScope.user === undefined) {
-                            alert("You need to login to vote");
-                            $location.path("/login");
-                        } else {
-
-                            //model.upCount=review.upvotes;
-                            var id = review._id;
-
-                            var key = false;
-                            var revs_user = $rootScope.user.votedByMe;
-                            console.log("Revs");
-                            console.log(revs_user);
-                            for (var i = 0; i < revs_user.length; i++) {
-
-                                if (revs_user[i].hotel_id === review._id) {
-                                    key = true;
-                                    break;
-                                }
-
-                            }
-
-                            if (key === true) {
-                                alert("You cannot revote");
-                            } else {
-
-                                review.downvotes = review.downvotes + 1;
-
-                                var updated_user = $rootScope.user;
-                                console.log("Updated user");
-                                console.log(updated_user);
-                                var new_res = {
-                                    hotel_id: review._id
-                                }
-
-                                updated_user.votedByMe.push(new_res);
-                                console.log(updated_user);
-                                console.log("Rootscope user111111111111111111");
-                                console.log($rootScope.user);
-                                console.log($rootScope.user._id);
-                                UserService.updateUser($rootScope.user._id, updated_user).then(function(updated) {
-                                    //now set the models to new names
-                                    //console.log(updated.length);
-                                    console.log("11222");
-                                    console.log(updated);
-                                    console.log("Updated");
-                                    console.log(updated);
-
-                                    model.user = updated;
-                                    $rootScope.user = updated;
-
-
-
-                                });
-
-
-                                ReviewService
-                                    .editReview(id, review)
-                                    .then(function(review) {
-
-                                        model.reviews = review;
-                                        console.log(review);
-
-
-
-                                    });
-
-                                UserService.getUserById(review.user_id)
-                                    .then(function(user) {
-                                        console.log(user);
-                                        var current = user;
-                                        current.points_collected = current.points_collected -5;
-                                        UserService.updateUser(current._id, current).then(function(updated) {
-
-
-                                            model.user = updated;
-                                            console.log("Updated");
-                                            console.log(user);
-
-
-
-                                        });
-
-
-
-
-
-                                    });
-}}}
 
         function addReview(review) {
 
@@ -247,7 +352,24 @@
                     .addReview(review)
                     .then(function(review) {
 
-                        model.reviews = review;
+                        var r1 = [];
+                        var count = 0;
+
+                        for (var i = 0; i < review.length; i++) {
+                            if (count === model.rev_len) {
+                                break;
+                            } else {
+                                r1.push(review[i]);
+                            }
+
+                        }
+
+
+
+                        model.reviews = r1;
+                        model.curr_review = r1;
+
+
                         console.log(review);
 
 
@@ -290,7 +412,24 @@
                     .then(function(review) {
                         console.log("Reviews updated");
 
-                        model.curr_review = review;
+                        var r1 = [];
+                        var count = 0;
+
+                        for (var i = 0; i < review.length; i++) {
+                            if (count === model.rev_len) {
+                                break;
+                            } else {
+                                r1.push(review[i]);
+                            }
+
+                        }
+
+
+
+                        model.reviews = r1;
+
+
+                        model.curr_review = r1;
 
                     });
 
@@ -322,13 +461,34 @@
             console.log("Entered restaurant search........");
             console.log($rootScope.user);
             console.log(resId);
+            model.rev_len = 5;
+
+
+
 
 
             ReviewService
                 .getReviewByHotelId(resId)
                 .then(function(review) {
 
-                    model.curr_review = review;
+                    var r1 = [];
+                    var count = 0;
+
+                    for (var i = 0; i < review.length; i++) {
+                        if (count === model.rev_len) {
+                            break;
+                        } else {
+                            r1.push(review[i]);
+                        }
+
+                    }
+
+
+
+                    model.reviews = r1;
+
+
+                    model.curr_review = r1;
 
                 });
 

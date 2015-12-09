@@ -18,6 +18,7 @@
                 <div class="inverted-color">
                     <h1>{{model.current.name}}</h1>
                     <p class="subtext"><i>{{model.addr}}</i></p>
+                    <p class="subtext"><i>Tags: Sandwiches, Breakfast</i></p>
                     <uib-rating ng-model="model.rating" readonly="true"></uib-rating>
                 </div>
             </div>
@@ -39,7 +40,10 @@
                     <div class="container-fluid">
                         <uib-rating ng-model="rev.rating" readonly="true"></uib-rating>
                         <h4>{{rev.review_text}}</h4>
-                        <p class="pull-right">-{{rev.firstName}}</p>
+                        <div class="site-color-background inverted-color review-user pull-right elevation2">
+                            <h4>{{rev.firstName}} {{rev.lastName}}</h4>
+                            <p>{{rev.points_collected}}</p>
+                        </div>
                     </div>
                     <div class="container-fluid">
                         <div class="button-div vote-button-up" type="submit" ng-click="model.upvote(rev)">
@@ -51,7 +55,8 @@
                     <hr>
                 </div>
                 <div>
-                    <div class="text-center more-button">Load More</div>
+                    <div class="text-center more-button" ng-if="model.revLenNotZero()" ng-click=model.incrNum()>Load More</div>
+                    <div class="text-center more-button" ng-if="model.revZero()">No reviews posted...Be the first one to post a review!!</div>
                 </div>
             </div>
 
@@ -62,7 +67,7 @@
                 <div class="form-header">
                     <h3 class="container-fluid site-color">Been to {{model.current.name}}? Write a review below!</h3>
                 </div>
-                <div class="review">
+                <div class="container-fluid review">
                     <label for="user_rating">Rating: </label>
                     <uib-rating class="site-color" ng-model="model.review.rating" readonly="false"></uib-rating>
                     <form class="form-horizontal">

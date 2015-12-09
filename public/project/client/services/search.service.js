@@ -51,7 +51,7 @@
             }).success(function(response) {
                 deferred.resolve(response);
             }).error(function(response, status, header, config) {
-                console.log(status);
+                //console.log(status);
                 deferred.resolve(response);
             });
             return deferred.promise;
@@ -129,7 +129,7 @@
             }).success(function(response) {
                 deferred.resolve(response);
             }).error(function(response, status, header, config) {
-                console.log(status);
+                //console.log(status);
                 deferred.resolve(response);
             });
             return deferred.promise;
@@ -207,7 +207,7 @@
             }).success(function(response) {
                 deferred.resolve(response);
             }).error(function(response, status, header, config) {
-                console.log(status);
+                //console.log(status);
                 deferred.resolve(response);
             });
             return deferred.promise;
@@ -218,9 +218,9 @@
 
 
         function searchByTerm(search_term,value) {
-            console.log("In model");
-            console.log(search_term);
-            console.log(value);
+            //console.log("In model");
+            //console.log(search_term);
+            //console.log(value);
 
             var deferred = $q.defer();
             var method = "GET";
@@ -228,7 +228,7 @@
             var params=undefined;
             if(value===undefined)
             {
-                console.log("In zero");
+                //console.log("In zero");
                  params = {
                     callback: 'angular.callbacks._0',
                     location: 'Boston',
@@ -245,7 +245,7 @@
 
             else if(value===0)
             {
-                console.log("In zero");
+                //console.log("In zero");
                  params = {
                     callback: 'angular.callbacks._0',
                     location: 'Boston',
@@ -260,7 +260,7 @@
 
             }
             else {
-                console.log("Not in zeero");
+                //console.log("Not in zeero");
                  params = {
                     callback: 'angular.callbacks._0',
                     location: 'Boston',
@@ -289,7 +289,7 @@
             }).success(function(response) {
                 deferred.resolve(response);
             }).error(function(response, status, header, config) {
-                console.log(status);
+                //console.log(status);
                 deferred.resolve(response);
             });
             return deferred.promise;

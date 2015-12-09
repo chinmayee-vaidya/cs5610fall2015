@@ -3,42 +3,160 @@
         <div class="row profile-header">
 
             <div class="inverted-color profile-details">
-                <h1 class="big">Welcome Admin</h1>
-                <h4 class="subtext"><i>You have the control.......</i></h4>
-
+                <h1 class="big">Administrative Dashboard</h1>
+                <h4 class="subtext">
+                    <i>Welcome admin</i>
+                </h4>
 
             </div>
         </div>
     </div>
 </div>
 
-
 <div class="container-fluid">
 
-            <div class="card elevation1">
-                <div class="container-fluid">
+    <div class="card elevation1 container-fluid col-lg-12">
 
+        <h2>User Data</h2>
+        <hr>
+        <div class="container-fluid table-responsive" ng-if="model.users.length!==0">
+            <table class="table table-striped">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Bio</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td><input class="form-control form-text-input" id="fname" ng-model="model.user.firstName" placeholder="First Name" type="text"></td>
+                    <td><input class="form-control form-text-input" id="lname" ng-model="model.user.lastName" placeholder="Last Name" type="text"></td>
+                    <td><input class="form-control form-text-input" id="uname" ng-model="model.user.username" placeholder="Username" type="text"></td>
+                    <td><input class="form-control form-text-input" id="pass" ng-model="model.user.password" placeholder="Password" type="text"></td>
+                    <td><input class="form-control form-text-input" id="bio" ng-model="model.user.bio" placeholder="Bio" type="text"></td>
+                    <td>
+                        <div class="container-fluid admin-top-right-pane">
+                            <button class="btn btn-success box-button" name="button" ng-click="model.addUser(model.user)" type="button">
+                                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            <button class="btn btn-info box-button" name="button" ng-click="model.makeChanges(model.user)" type="button">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                        </div>
+                    </td>
 
+                </tr>
 
+                <tr ng-repeat="user in model.users">
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.password}}</td>
+                    <td>{{user.bio}}</td>
+                    <td>
 
+                        <button class="btn btn-warning box-button" name="button" ng-click="model.updateUser(user)" type="button">
+                            <span aria-hidden="true" class="glyphicon glyphicon-pencil image-button"></span>
+                        </button>
+                        <button class="btn btn-danger box-button" disabled="disabled" name="button" ng-click="model.removeUser(user)" ng-if="model.isAdmin(user)" type="button">
+                            <span aria-hidden="true" class="glyphicon glyphicon-remove image-button"></span>
+                        </button>
+                        <button class="btn btn-danger box-button" name="button" ng-click="model.removeUser(user)" ng-if="model.isNotAdmin(user)" type="button">
+                            <span aria-hidden="true" class="glyphicon glyphicon-remove image-button"></span>
+                        </button>
 
-<h2>User Data</h2>
+                    </td>
+                </tr>
+            </table>
 
+            <div class="container-fluid table-responsive" ng-if="model.users.length===0">
+                <table class="table table-striped">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Bio</th>
 
+                    </tr>
 
-<div class="table-responsive" ng-if="model.users.length!==0">
-    <table class="table table-striped" >
-        <tr>
-            <th>User ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Bio</th>
-            <th>Action</th>
+                    <tr>
+                        <td>No users
+                        </td>
+                        <td>No users</td>
+                        <td>No users</td>
+                        <td>No users</td>
+                        <td>No users</td>
+                        <td>No users</td>
 
-        </tr>
-        <!--<td><input class="form-control" id="title" ng-model="model.form.title" placeholder="name" type="text"></td>
+                    </tr>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card elevation1 container-fluid col-lg-12">
+
+        <h2>Review Data</h2>
+        <hr>
+        <div class="table-responsive" ng-if="model.reviews.length!=0">
+            <table class="table table-striped">
+                <tr>
+                    <th>Hotel Name</th>
+                    <th>Posted by</th>
+                    <th>Review Text</th>
+                    <th>Rating</th>
+                    <th>Action</th>
+
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input class="form-control form-text-input" id="rev_text" ng-model="model.review.review_text" placeholder="Review Text" type="text"></td>
+                    <td><input class="form-control form-text-input" id="rate" ng-model="model.review.rating" placeholder="Rating" type="text"></td>
+
+                    <td>
+                        <div class="container-fluid admin-top-right-pane">
+                            <button class="btn btn-info box-button" name="button" ng-click="model.makeChangesRev(model.review)" type="button">
+                                <span aria-hidden="true" class="glyphicon glyphicon-ok"></span>
+                            </button>
+                        </div>
+                    </td>
+
+                </tr>
+
+                <tr ng-repeat="rev in model.reviews">
+                    <td>{{rev.hotel_name}}</td>
+                    <td>{{rev.firstName}}
+                        {{rev.lastName}}</td>
+                    <td>{{rev.review_text}}</td>
+                    <td>{{rev.rating}}</td>
+                    <td>
+                        <button class="btn btn-warning box-button" name="button" ng-click="model.updateReview(rev)" type="button">
+                            <span aria-hidden="true" class="glyphicon glyphicon-pencil image-button"></span>
+                        </button>
+                        <button class="btn btn-danger box-button" name="button" ng-click="model.removeReview(rev)" type="button">
+                            <span aria-hidden="true" class="glyphicon glyphicon-remove image-button"></span>
+                        </button>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="table-responsive" ng-if="model.reviews.length===0">
+            <table class="table table-striped">
+                <tr>
+                    <th>Hotel Name</th>
+                    <th>Posted by</th>
+                    <th>Review Text</th>
+                    <th>Rating</th>
+
+                </tr>
+                <!--<td><input class="form-control" id="title" ng-model="model.form.title" placeholder="name" type="text"></td>
         <td>
             <button class="btn btn-success" name="button" ng-click="model.addForm(model.form)" type="button">
                 <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
@@ -47,140 +165,15 @@
                 <span aria-hidden="true" class="glyphicon glyphicon-ok"></span>
             </button>
         </td>-->
-        <tr ng-repeat="user in model.users">
-            <td>{{user._id}}</td>
-            <td>{{user.firstName}}</td>
-            <td>{{user.lastName}}</td>
-            <td>{{user.username}}</td>
-            <td>{{user.password}}</td>
-            <td>{{user.bio}}</td>
-            <td>
-                <button class="btn btn-danger" name="button" ng-click="model.removeUser(user)" type="button" disabled="disabled" ng-if="model.isAdmin(user)">
-                    <span aria-hidden="true" class="glyphicon glyphicon-remove image-button"></span>
-                </button>
+                <tr>
+                    <td>No reviews</td>
+                    <td>No reviews</td>
+                    <td>No reviews</td>
+                    <td>No reviews</td>
 
-                <button class="btn btn-danger" name="button" ng-click="model.removeUser(user)" type="button" ng-if="model.isNotAdmin(user)">
-                    <span aria-hidden="true" class="glyphicon glyphicon-remove image-button"></span>
-                </button>
-                <!--<button class="btn btn-warning" name="button" ng-click="model.updateForm(form)" type="button">
-                    <span aria-hidden="true" class="glyphicon glyphicon-pencil image-button"></span>
-                </button>-->
+                </tr>
+            </table>
 
-            </td>
-        </tr>
-    </table>
-
-</div>
-
-<div class="table-responsive" ng-if="model.users.length===0">
-    <table class="table table-striped" >
-        <tr>
-            <th>User ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Bio</th>
-
-
-        </tr>
-        <!--<td><input class="form-control" id="title" ng-model="model.form.title" placeholder="name" type="text"></td>
-        <td>
-            <button class="btn btn-success" name="button" ng-click="model.addForm(model.form)" type="button">
-                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
-            </button>
-            <button class="btn btn-info" name="button" ng-click="model.selectForm($index)" type="button">
-                <span aria-hidden="true" class="glyphicon glyphicon-ok"></span>
-            </button>
-        </td>-->
-        <tr>
-            <td>No users </td>
-            <td>No users</td>
-            <td>No users</td>
-            <td>No users</td>
-            <td>No users</td>
-            <td>No users</td>
-
-        </tr>
-    </table>
-
-</div>
-
-</div>
-</div>
-</div>
-
-
-<div class="container-fluid">
-
-            <div class="card12 elevation1">
-                <div class="container-fluid">
-
-
-
-<h2>Review Data</h2>
-
-<div class="table-responsive" ng-if="model.reviews.length!=0">
-    <table class="table table-striped" >
-        <tr>
-            <th>Review ID</th>
-            <th>Hotel Name</th>
-            <th>Posted by</th>
-            <th>Review Text</th>
-            <th>Rating</th>
-            <th>Action</th>
-
-        </tr>
-
-        <tr ng-repeat="rev in model.reviews">
-            <td>{{rev._id}}</td>
-            <td>{{rev.hotel_name}}</td>
-            <td>{{rev.firstName}}  {{rev.lastName}}</td>
-            <td>{{rev.review_text}}</td>
-            <td>{{rev.rating}}</td>
-            <td>
-                <button class="btn btn-danger" name="button" ng-click="model.removeReview(rev)" type="button">
-                    <span aria-hidden="true" class="glyphicon glyphicon-remove image-button"></span>
-                </button>
-                <!--<button class="btn btn-warning" name="button" ng-click="model.updateForm(form)" type="button">
-                    <span aria-hidden="true" class="glyphicon glyphicon-pencil image-button"></span>
-                </button>-->
-
-            </td>
-        </tr>
-    </table>
-</div>
-<div class="table-responsive" ng-if="model.reviews.length===0">
-    <table class="table table-striped" >
-        <tr>
-            <th>Review ID</th>
-            <th>Hotel Name</th>
-            <th>Posted by</th>
-            <th>Review Text</th>
-            <th>Rating</th>
-
-
-
-        </tr>
-        <!--<td><input class="form-control" id="title" ng-model="model.form.title" placeholder="name" type="text"></td>
-        <td>
-            <button class="btn btn-success" name="button" ng-click="model.addForm(model.form)" type="button">
-                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
-            </button>
-            <button class="btn btn-info" name="button" ng-click="model.selectForm($index)" type="button">
-                <span aria-hidden="true" class="glyphicon glyphicon-ok"></span>
-            </button>
-        </td>-->
-        <tr>
-            <td>No reviews</td>
-            <td>No reviews</td>
-            <td>No reviews</td>
-            <td>No reviews</td>
-            <td>No reviews</td>
-
-
-        </tr>
-    </table>
-
-</div></div></div>
+        </div>
+    </div>
 </div>

@@ -12,9 +12,7 @@
                 controller: "HomeController",
                 controllerAs: "model"
             })
-            .when("/fields", {
-                templateUrl: "views/field/field.view.html"
-            })
+
             .when("/profile/:userId", {
                 templateUrl: "views/profile/profile.view.html",
                 controller: "ProfileController",
@@ -50,7 +48,7 @@
                 controllerAs: "model"
 
             })
-            
+
             .when("/username", {
                 templateUrl: "views/profile/profile.view.html"
             })

@@ -6,7 +6,24 @@ module.exports = function(app, model) {
     app.get("/api/project/hotel/:id",getReviewByHotelId);
     app.post("/api/project/review", addReview);
     app.delete("/api/project/review/:id",deleteReview);
+    app.delete("/api/project/user/:id/review",deleteReviewById);
     app.put("/api/project/review/:id",updateReview);
+
+
+    function deleteReviewById(req,res){
+        var fid = req.params["id"];
+        console.log("Serverrrrrrrrrrr side");
+        console.log(fid);
+
+        model
+            .deleteByUserId(fid)
+            .then(function(form) {
+                res.json(form);
+
+            })
+    }
+
+
 
     function updateReview(req,res){
 

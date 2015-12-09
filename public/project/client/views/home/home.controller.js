@@ -5,15 +5,47 @@
 
     function HomeController($scope, $rootScope, $routeParams, $location, SearchService) {
 
+        var geocoder;
         var model = this;
         model.search = search;
+        model.searchData = {};
+
+        function setPosition(position) {
+            var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            geocoder.geocode({
+                'location': latlng
+            }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results.length > 1) {
+                        //get the best match
+                        var best = results[0].address_components;
+                        var city_found = 0;
+                        for (var i = 0; i < best.length; i++) {
+                            //loop through types to check if it is a locality
+                            for (var j = 0; j < best[i].types.length; j++) {
+                                if (best[i].types[j] == 'locality') {
+                                    model.searchData.city = best[i].long_name;
+                                    city_found = 1;
+                                    break;
+                                }
+                            }
+                            if (city_found == 1) {
+                                break;
+                            }
+                        }
+                    } else {
+                        //set default location
+                        model.searchData.city = 'Boston';
+                    }
+                } else {
+                    //set default location
+                    model.searchData.city = 'Boston';
+                    //console.log("Geocoder failed: " + status);
+                }
+            });
+        }
 
         function init() {
-
-            if($rootScope.user===undefined)
-            {
-                $location.path("/home");
-            }
 
             SearchService.searchByNumberAndTerm(1, "prawns")
                 .then(function(resp) {
@@ -56,16 +88,30 @@
                     model.hotel4.desc = c.snippet_text;
                 });
 
+            $(document).ready(function() {
+                //initialize geocoder
+                geocoder = new google.maps.Geocoder();
+
+                //Set geolocation
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(setPosition);
+                } else {
+                    //console.log("not supported");
+                    //set default location
+                    model.searchData.city = 'Boston';
+                }
+            });
         }
 
         init();
+
 
         function search(data) {
 
             if (data === undefined) {
                 alert("Enter valid value to search");
             } else {
-                var current = data.type;
+                var current = data.query;
                 var place = data.city;
 
                 if (current !== undefined && place === undefined) {

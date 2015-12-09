@@ -20,7 +20,7 @@
         function searchByBusinessId(bid)
         {
 
-            console.log("Here..........");
+            //console.log("Here..........");
 
             var deferred=$q.defer();
 

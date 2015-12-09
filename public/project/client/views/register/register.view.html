@@ -11,34 +11,62 @@
                     <hr>
                 </div>
                 <div class="container-fluid form-container">
-                    <form class="form-horizontal">
+                    <form id="regForm" name="regForm" class="form-horizontal">
                         <div class="form-group">
                             <label class="control-label" for="firstName">First Name:</label>
-                            <input class="form-control form-text-input" id="firstname" ng-model="model.user.firstName" placeholder="First Name" type="text" />
+                            <input class="form-control form-text-input" id="firstname" name="firstname" ng-model="model.user.firstName" placeholder="First Name" type="text" ng-pattern="/^[^0-9]*$/" required/>
+                            <div ng-messages="regForm.firstname.$error" ng-show="regForm.firstname.$dirty">
+                                <p class="text-danger" ng-message="required">First name is required.</p>
+                                <p class="text-danger" ng-message="pattern">Invalid First Name.</p>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="lastName">Last Name:</label>
-                            <input class="form-control form-text-input" id="lastname" ng-model="model.user.lastName" placeholder="Last Name" type="text" />
+                            <input class="form-control form-text-input" id="lastname" name="lastname" ng-model="model.user.lastName" placeholder="Last Name" type="text" ng-pattern="/^[^0-9]*$/" required/>
+                            <div ng-messages="regForm.lastname.$error" ng-show="regForm.lastname.$dirty">
+                                <p class="text-danger" ng-message="required">Last name is required.</p>
+                                <p class="text-danger" ng-message="pattern">Invalid Last Name.</p>
+                            </div>
                         </div>
                         <hr>
                         <div class="form-group">
                             <label class="control-label" for="username">Username:</label>
-                            <input class="form-control form-text-input" id="username" ng-model="model.user.username" placeholder="Username" type="text" />
+                            <input class="form-control form-text-input" id="username" name="username" ng-model="model.user.username" placeholder="Username" type="text" ng-minlength="4" ng-maxlength="32" ng-pattern="/^[^\s]*$/" required/>
+                            <div ng-messages="regForm.username.$error" ng-show="regForm.username.$dirty">
+                                <p class="text-danger" ng-message="required">Username is required.</p>
+                                <p class="text-danger" ng-message="pattern">Invalid Username.</p>
+                                <p class="text-danger" ng-message="minlength">Username should be between 4 to 32 characters long.</p>
+                                <p class="text-danger" ng-message="maxlength">Username should be between 4 to 32 characters long.</p>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="password">Password:</label>
-                            <input class="form-control form-text-input" id="password" ng-model="model.user.password" placeholder="Password" type="password" />
+                            <input class="form-control form-text-input" id="password" name="password" ng-model="model.user.password" placeholder="Password" type="password" ng-minlength="8" ng-pattern="/^[^\s]*$/" required/>
+                            <div ng-messages="regForm.password.$error" ng-show="regForm.password.$dirty">
+                                <p class="text-danger" ng-message="required">Password is required.</p>
+                                <p class="text-danger" ng-message="pattern">Invalid Password. No spaces allowed.</p>
+                                <p class="text-danger" ng-message="minlength">Password should be at least 8 characters long.</p>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="confpassword">Confirm Password:</label>
-                            <input class="form-control form-text-input" id="confpassword" ng-model="model.user.verify_password" placeholder="Verify Password" type="password" />
+                            <input class="form-control form-text-input" id="confpassword" name="confpassword" ng-model="model.user.verify_password" placeholder="Verify Password" type="password" ng-pattern="model.user.password" required ng-keyup="model.match(model.user.password, model.user.verify_password)"/>
+                            <p class="text-danger" ng-show="regForm.confpassword.$dirty && model.passnomatch">Passwords do not match.</p>
+                            <div ng-messages="regForm.confpassword.$error" ng-show="regForm.confpassword.$dirty">
+                                <p class="text-danger" ng-message="required">Field is required.</p>
+                            </div>
                         </div>
                         <hr>
                         <div class="form-group">
                             <label class="control-label" for="email">Email:</label>
-                            <input class="form-control form-text-input" id="email" ng-model="model.user.email" placeholder="Email" type="email" />
+                            <input class="form-control form-text-input" id="email" name="email" ng-model="model.user.email" placeholder="Email" type="email" ng-pattern="/.+@.+\..+/" required/>
+                            <div ng-messages="regForm.email.$error" ng-show="regForm.email.$dirty">
+                                <p class="text-danger" ng-message="required">Email is required.</p>
+                                <p class="text-danger" ng-message="pattern">Invalid Email Address</p>
+                            </div>
                         </div>
-                        <br><hr>
+                        <br>
+                        <hr>
                         <div class="form-group">
                             <button class="form-control btn btn-primary form-button" ng-click="model.register(model.user)" type="Register">Register</button>
                         </div>
