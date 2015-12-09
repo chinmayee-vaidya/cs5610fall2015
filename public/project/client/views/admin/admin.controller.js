@@ -75,13 +75,15 @@
 
         function addUser(user) {
 
-            user.points_collected = 0;
-            user.votedByMe = [];
-            user.reviewed = [];
+
 
             if (user.firstName === undefined || user.lastName === undefined || user.username === undefined || user.password === undefined) {
                 alert("Incomplete data to add a new user");
             } else {
+
+                user.points_collected = 0;
+                user.votedByMe = [];
+                user.reviewed = [];
 
 
                 UserService
