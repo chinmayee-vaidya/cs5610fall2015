@@ -278,6 +278,33 @@
                             .then(function(review) {
 
 
+                var updated_user = $rootScope.user;
+                console.log("Updated user");
+                console.log(updated_user);
+                var new_res = {
+                    hotel_id: resId
+                }
+
+                updated_user.reviewed.push(new_res);
+                console.log(updated_user);
+                console.log("Rootscope user111111111111111111");
+                console.log($rootScope.user);
+                console.log($rootScope.user._id);
+                UserService.updateUser($rootScope.user._id, updated_user).then(function(updated) {
+                    //now set the models to new names
+                    //console.log(updated.length);
+                    console.log("11222");
+                    console.log(updated);
+                    console.log("Updated");
+                    console.log(updated);
+
+                    model.user = updated;
+                    $rootScope.user = updated;
+
+
+                });
+
+
 
 
                                 model.reviews = review;
