@@ -11,50 +11,9 @@
         model.addReview = addReview;
         model.upvote = upvote;
         model.downvote = downvote;
-        model.revLenNotZero = revLenNotZero;
+        //model.revLenNotZero = revLenNotZero;
         model.revZero = revZero;
-        model.incrNum = incrNum;
-
-        function incrNum() {
-
-
-            ReviewService
-                .getReviewByHotelId(resId)
-                .then(function(review) {
-                    console.log("Reviews updated");
-                    if(review.length<model.rev_len)
-                    {
-                        if((model.rev_len-review.length)===0)
-                            model.rev_len = model.rev_len + 5;
-
-                    }
-                    else{
-                            model.rev_len = model.rev_len + 5;
-                    }
-
-                    var r1 = [];
-                    var count = 0;
-
-                    for (var i = 0; i < review.length; i++) {
-                        if (count === model.rev_len) {
-                            break;
-                        } else {
-                            r1.push(review[i]);
-                        }
-
-                    }
-
-
-
-                    model.reviews = r1;
-
-
-                    model.curr_review = r1;
-
-                });
-
-
-        }
+        //model.incrNum = incrNum;
 
 
 
@@ -70,25 +29,7 @@
             }
         }
 
-        function revsBefore() {
-            if (model.reviews === undefined)
-                return false;
-            else if (model.reviews.length > 0 && model.reviews.length < 5)
-                return true;
-            else {
-                return false;
-            }
-        }
 
-        function revLenNotZero() {
-            if (model.reviews === undefined)
-                return false;
-            else if (model.reviews.length > 4)
-                return true;
-            else {
-                return false;
-            }
-        }
 
         function upvote(review) {
 
@@ -155,24 +96,14 @@
                                 .getReviewByHotelId(resId)
                                 .then(function(review) {
 
-                                    var r1 = [];
-                                    var count = 0;
-
-                                    for (var i = 0; i < review.length; i++) {
-                                        if (count === model.rev_len) {
-                                            break;
-                                        } else {
-                                            r1.push(review[i]);
-                                        }
-
-                                    }
 
 
 
-                                    model.reviews = r1;
+
+                                    model.reviews = review;
 
 
-                                    model.curr_review = r1;
+                                    model.curr_review = review;
 
                                 });
 
@@ -268,24 +199,14 @@
                                 .getReviewByHotelId(resId)
                                 .then(function(review) {
 
-                                    var r1 = [];
-                                    var count = 0;
-
-                                    for (var i = 0; i < review.length; i++) {
-                                        if (count === model.rev_len) {
-                                            break;
-                                        } else {
-                                            r1.push(review[i]);
-                                        }
-
-                                    }
 
 
 
-                                    model.reviews = r1;
+
+                                    model.reviews = review;
 
 
-                                    model.curr_review = r1;
+                                    model.curr_review = review;
 
                                 });
 
@@ -352,91 +273,24 @@
                     .addReview(review)
                     .then(function(review) {
 
-                        var updated_user = $rootScope.user;
-                        console.log("Updated user");
-                        console.log(updated_user);
-                        var new_res = {
-                            hotel_id: resId
-                        }
-
-                        updated_user.reviewed.push(new_res);
-                        console.log(updated_user);
-                        console.log("Rootscope user111111111111111111");
-                        console.log($rootScope.user);
-                        console.log($rootScope.user._id);
-                        UserService.updateUser($rootScope.user._id, updated_user).then(function(updated) {
-                            //now set the models to new names
-                            //console.log(updated.length);
-                            console.log("11222");
-                            console.log(updated);
-                            console.log("Updated");
-                            console.log(updated);
-
-                            model.user = updated;
-                            $rootScope.user = updated;
-
-
-                        });
-
-                        var r1 = [];
-                        var count = 0;
-
-                        for (var i = 0; i < review.length; i++) {
-                            if (count === model.rev_len) {
-                                break;
-                            } else {
-                                r1.push(review[i]);
-                            }
-
-                        }
+                        ReviewService
+                            .getReviewByHotelId(resId)
+                            .then(function(review) {
 
 
 
-                        model.reviews = r1;
-                        model.curr_review = r1;
+
+                                model.reviews = review;
 
 
-                        console.log(review);
+                                model.curr_review = review;
 
-
+                            });
 
                     });
 
                 console.log("Printing rootscope outside");
                 console.log($rootScope.user);
-
-
-
-
-
-                ReviewService
-                    .getReviewByHotelId(resId)
-                    .then(function(review) {
-                        console.log("Reviews updated");
-
-                        var r1 = [];
-                        var count = 0;
-
-                        for (var i = 0; i < review.length; i++) {
-                            if (count === model.rev_len) {
-                                break;
-                            } else {
-                                r1.push(review[i]);
-                            }
-
-                        }
-
-
-
-                        model.reviews = r1;
-
-
-                        model.curr_review = r1;
-
-                    });
-
-
-
 
 
             } else {
@@ -463,36 +317,30 @@
             console.log("Entered restaurant search........");
             console.log($rootScope.user);
             console.log(resId);
-            model.rev_len = 5;
-
-
-
 
 
             ReviewService
                 .getReviewByHotelId(resId)
                 .then(function(review) {
 
-                    var r1 = [];
-                    var count = 0;
-
-                    for (var i = 0; i < review.length; i++) {
-                        if (count === model.rev_len) {
-                            break;
-                        } else {
-                            r1.push(review[i]);
-                        }
-
-                    }
 
 
 
-                    model.reviews = r1;
+                    model.reviews = review;
 
 
-                    model.curr_review = r1;
+                    model.curr_review = review;
 
                 });
+
+
+
+
+
+
+
+
+
 
 
             BusinessService.searchByBusinessId(resId)
@@ -510,6 +358,8 @@
                     var place = model.current.location.coordinate;
                     model.lat = place.latitude;
                     model.longi = place.longitude;
+
+
 
                 });
 
