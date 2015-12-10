@@ -3,7 +3,7 @@
     angular.module("HotelApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $rootScope, $routeParams, $location, UserService, ReviewService) {
+    function ProfileController($scope, $rootScope, $routeParams, $location, UserService, ReviewService,$cookieStore) {
 
         var model = this;
         model.updateData = updateData;
@@ -86,6 +86,7 @@
                                             if (current._id === $rootScope.user._id) {
                                                 //console.log("Changing the value of rootscope...");
                                                 $rootScope.user = current;
+                                                $cookieStore.put("loggedin", current);
                                                 //console.log($rootScope.user);
                                                 //console.log("Review delete");
                                                 //console.log(current);
@@ -111,6 +112,7 @@
                                             current.votedByMe = vo_list;
                                             if (current._id === $rootScope.user._id) {
                                                 $rootScope.user = current;
+                                                $cookieStore.put("loggedin", current);
                                             }
                                             UserService.updateUser(current._id, current).then(function(updated) {
                                                 //now set the models to new names
@@ -261,6 +263,7 @@
             });
 
             $rootScope.user = model.user;
+            $cookieStore.put("loggedin", model.user);
         }
 
     }
