@@ -34,6 +34,12 @@ body {
     padding-top: 200px;
     padding-bottom: 200px;
 }
+
+.space-top-bottom-small {
+    padding-top: 55px;
+    padding-bottom: 200px;
+}
+
 .text-input {
     height: 60px;
     border-radius: 0;
@@ -331,5 +337,10 @@ body {
     }
     .top-button{
         padding-bottom: 0px;
+    }
+
+    .space-top-bottom {
+        padding-top: 80px;
+        padding-bottom: 100px;
     }
 }
