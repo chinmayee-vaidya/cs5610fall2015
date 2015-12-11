@@ -72,7 +72,7 @@
                 .then(function(resp) {
                     model.hotel3 = resp.businesses[0];
                     var c = model.hotel3;
-                    var ad1 = c.location.display_address[0];
+                    var ad1 = c.location.display_address;
                     model.hotel3.addr = ad1[0] + ", " + ad1[1] + ", " + ad1[2] + "  Ph No: " + c.display_phone;
                     model.hotel3.desc = c.snippet_text;
 
@@ -83,7 +83,7 @@
                 .then(function(resp) {
                     model.hotel4 = resp.businesses[0];
                     var c = model.hotel4;
-                    var ad1 = c.location.display_address[0];
+                    var ad1 = c.location.display_address;
                     model.hotel4.addr = ad1[0] + ", " + ad1[1] + ", " + ad1[2] + "  Ph No: " + c.display_phone;
                     model.hotel4.desc = c.snippet_text;
                 });
