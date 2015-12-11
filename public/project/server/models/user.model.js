@@ -20,12 +20,12 @@ module.exports = function(mongoose, db) {
     function create(user) {
         var deferred = q.defer();
         var uname = user._id;
-        //console.log("To be created" + uname);
-        //console.log("To be created" + user);
+        ////console.log("To be created" + uname);
+        ////console.log("To be created" + user);
         UserModel1.create(user, function(err, user) {
             UserModel1.find(function(err, users) {
-                //console.log("In user: " + users);
-                //console.log(user._id);
+                ////console.log("In user: " + users);
+                ////console.log(user._id);
                 deferred.resolve(users);
             });
         });
@@ -49,11 +49,11 @@ module.exports = function(mongoose, db) {
 
 
         var deferred = q.defer();
-        //console.log("in model: " + userId);
+        ////console.log("in model: " + userId);
         UserModel1.findById({
             _id: userId
         }, function(err, user) {
-            //console.log(user);
+            ////console.log(user);
             deferred.resolve(user);
 
         });
@@ -64,8 +64,8 @@ module.exports = function(mongoose, db) {
     }
 
     function updateUser(id, user) {
-        console.log("Entered update user");
-        console.log(user);
+        //console.log("Entered update user");
+        //console.log(user);
         //var _id = mongoose.Types.ObjectId.fromString(id1);
         var deferred = q.defer();
         var uname=user.username;
@@ -80,8 +80,8 @@ module.exports = function(mongoose, db) {
         var curr_pts=user.points_collected;
 
         UserModel1.findById(id, function(err, user){
-            console.log("printing........");
-            console.log(user);
+            //console.log("printing........");
+            //console.log(user);
             user.username=uname;
             user.password=pass;
             user.firstName=fname;
@@ -92,15 +92,15 @@ module.exports = function(mongoose, db) {
             user.reviewed=revs;
             user.votedByMe=votes;
             user.points_collected=curr_pts;
-            console.log("Find users");
-            console.log(user);
+            //console.log("Find users");
+            //console.log(user);
 
             user.save(function(err, user){
                 if(err)
-                console.log(err);
-                console.log("11111111111111111122222222222");
+                //console.log(err);
+                //console.log("11111111111111111122222222222");
                 console.log(user);
-                //console.log("Server side: "+user);
+                ////console.log("Server side: "+user);
                 deferred.resolve(user);
             });
         });
@@ -113,8 +113,8 @@ module.exports = function(mongoose, db) {
 
         UserModel1.findByIdAndRemove(id, function(err, user) {
             UserModel1.find(function(err, users) {
-                //console.log("In user: " + users);
-                //console.log(user._id);
+                ////console.log("In user: " + users);
+                ////console.log(user._id);
                 deferred.resolve(users);
             });
 

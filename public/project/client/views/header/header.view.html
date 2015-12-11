@@ -13,14 +13,14 @@
         </div>
         <div class="navbar-collapse collapse" id="navigation">
             <ul class="nav navbar-nav navbar-right" ng-if="user!==undefined">
-                <li ng-class="{'active': $location.url().indexOf('documentation')!=-1}">
+                <li ng-class="{'active': $location.url().indexOf('google')!=-1}">
                     <a href="https://docs.google.com/document/d/1gFblO--pQeIMNDrqVbUAkNJjwss03BDgfdd_4VStmV4/edit?usp=sharing">Documentation</a>
                 </li>
                 <li ng-class="{'active': $location.url().indexOf('home')!=-1}">
                     <a href="#/home/{{user._id}}">Home</a>
                 </li>
 
-                <li ng-class="{'active': $location.url().indexOf('username')!=-1}">
+                <li ng-class="{'active': $location.url().indexOf('profile')!=-1}">
                     <a href="#/profile/{{user._id}}">{{user.username}}</a>
                 </li>
                 <li ng-class="{'active': $location.url().indexOf('admin')!=-1}" ng-if="isAdmin()">
@@ -32,7 +32,7 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right" ng-if="user===undefined">
-                <li ng-class="{'active': $location.url().indexOf('documentation')!=-1}">
+                <li ng-class="{'active': $location.url().indexOf('google')!=-1}">
                     <a href="https://docs.google.com/document/d/1gFblO--pQeIMNDrqVbUAkNJjwss03BDgfdd_4VStmV4/edit?usp=sharing">Documentation</a>
                 </li>
                 <li ng-class="{'active': $location.url().indexOf('home')!=-1}">

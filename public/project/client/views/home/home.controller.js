@@ -40,7 +40,7 @@
                 } else {
                     //set default location
                     model.searchData.city = 'Boston';
-                    //console.log("Geocoder failed: " + status);
+                    ////console.log("Geocoder failed: " + status);
                 }
             });
         }
@@ -96,7 +96,7 @@
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(setPosition);
                 } else {
-                    //console.log("not supported");
+                    ////console.log("not supported");
                     //set default location
                     model.searchData.city = 'Boston';
                 }

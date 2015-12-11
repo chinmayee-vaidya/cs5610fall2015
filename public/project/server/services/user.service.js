@@ -43,9 +43,9 @@ module.exports = function(app, model) {
 
     app.get('/api/project/user/:id', function(req, res) {
         var userId = req.params.id;
-        //console.log("Extracted: "+userId);
+        ////console.log("Extracted: "+userId);
         user_model.findById(userId).then(function(user){
-            //console.log(user);
+            ////console.log(user);
             res.json(user);
         });
     });
@@ -58,30 +58,30 @@ module.exports = function(app, model) {
 */
 
 app.delete('/api/project/user/:id', function(req, res) {
-    console.log("server side delete");
+    //console.log("server side delete");
     var userId = req.params.id;
 
-    //console.log("sent req: "+user.username);
+    ////console.log("sent req: "+user.username);
     user_model.deleteUser(userId).then(function(updated){
         res.json(updated);
     });
 });
     app.post('/api/project/user', function(req, res) {
         var user = req.body;
-        //console.log("Display"+user);
+        ////console.log("Display"+user);
         user_model.create(user).then(function(users){
-            //console.log(users);
+            ////console.log(users);
             res.json(users);
         });
     });
 
     app.put('/api/project/user/:id', function(req, res) {
-        console.log("Server service");
+        //console.log("Server service");
         var user = req.body;
-        console.log(user);
+        //console.log(user);
         var userId = req.params.id;
         user.id = userId;
-        //console.log("sent req: "+user.username);
+        ////console.log("sent req: "+user.username);
         user_model.updateUser(userId, user).then(function(updated){
             res.json(updated);
         });

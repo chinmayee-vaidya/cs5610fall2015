@@ -8,8 +8,8 @@
         var model = this;
 
         $rootScope.loggedIn = $cookieStore.get("loggedin");
-        //console.log("Logged in");
-        //console.log($rootScope.loggedIn);
+        ////console.log("Logged in");
+        ////console.log($rootScope.loggedIn);
         if ($rootScope.loggedIn !== false) {
             $rootScope.loggedOut = "";
             $rootScope.user = $rootScope.loggedIn;

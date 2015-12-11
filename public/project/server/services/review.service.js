@@ -12,8 +12,8 @@ module.exports = function(app, model) {
 
     function deleteReviewById(req,res){
         var fid = req.params["id"];
-        console.log("Serverrrrrrrrrrr side");
-        console.log(fid);
+        //console.log("Serverrrrrrrrrrr side");
+        //console.log(fid);
 
         model
             .deleteByUserId(fid)
@@ -30,7 +30,7 @@ module.exports = function(app, model) {
         var review = req.body;
         var id = req.params.id;
 
-        //console.log("sent req: "+user.username);
+        ////console.log("sent req: "+user.username);
         model.updateReview(id, review).then(function(updated){
             res.json(updated);
         });
@@ -39,8 +39,8 @@ module.exports = function(app, model) {
 
     function deleteReview(req,res){
         var fid = req.params["id"];
-        console.log("Serverrrrrrrrrrr side");
-        console.log(fid);
+        //console.log("Serverrrrrrrrrrr side");
+        //console.log(fid);
 
         model
             .deleteById(fid)
@@ -90,8 +90,8 @@ module.exports = function(app, model) {
 
         var review = req.body;
 
-        //console.log("Server32342");
-        //console.log(form);
+        ////console.log("Server32342");
+        ////console.log(form);
         model
             .addReview(review)
             .then(function(review) {
@@ -106,7 +106,7 @@ module.exports = function(app, model) {
         var fid = req.params.formId;
 
 
-        //console.log("sent req: "+user.username);
+        ////console.log("sent req: "+user.username);
         model.updateForm(fid, form).then(function(updated){
 
             res.json(updated);
@@ -175,8 +175,8 @@ module.exports = function(app, model) {
 
         var form = req.body;
 
-        //console.log("Server32342");
-        //console.log(form);
+        ////console.log("Server32342");
+        ////console.log(form);
         model
             .addForm(form)
             .then(function(forms) {

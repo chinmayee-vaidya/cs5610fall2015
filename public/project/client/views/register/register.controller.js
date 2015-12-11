@@ -27,13 +27,13 @@
 
         function init() {
             model.users = UserService.findAllUsers();
-            //console.log(model.users);
+            ////console.log(model.users);
 
         }
         init();
 
         function addUser(user) {
-            // //console.log("User id:"+user.username);
+            // ////console.log("User id:"+user.username);
             if (user !== undefined) {
                 if (user.username !== undefined && user.password !== undefined && user.verify_password !== undefined && user.password == user.verify_password && user.email !== undefined) {
                     user.points_collected = 0;

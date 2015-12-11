@@ -43,8 +43,8 @@
 
                 var key = false;
                 var revs_user = $rootScope.user.votedByMe;
-                ////console.log("Revs");
-                ////console.log(revs_user);
+                //////console.log("Revs");
+                //////console.log(revs_user);
                 for (var i = 0; i < revs_user.length; i++) {
 
                     if (revs_user[i].hotel_id === review._id) {
@@ -61,24 +61,24 @@
                     review.upvotes = review.upvotes + 1;
 
                     var updated_user = $rootScope.user;
-                    ////console.log("Updated user");
-                    ////console.log(updated_user);
+                    //////console.log("Updated user");
+                    //////console.log(updated_user);
                     var new_res = {
                         hotel_id: review._id
                     }
 
                     updated_user.votedByMe.push(new_res);
-                    ////console.log(updated_user);
-                    ////console.log("Rootscope user111111111111111111");
-                    ////console.log($rootScope.user);
-                    ////console.log($rootScope.user._id);
+                    //////console.log(updated_user);
+                    //////console.log("Rootscope user111111111111111111");
+                    //////console.log($rootScope.user);
+                    //////console.log($rootScope.user._id);
                     UserService.updateUser($rootScope.user._id, updated_user).then(function(updated) {
                         //now set the models to new names
-                        //////console.log(updated.length);
-                        ////console.log("11222");
-                        ////console.log(updated);
-                        ////console.log("Updated");
-                        ////console.log(updated);
+                        ////////console.log(updated.length);
+                        //////console.log("11222");
+                        //////console.log(updated);
+                        //////console.log("Updated");
+                        //////console.log(updated);
 
                         model.user = updated;
                         $rootScope.user = updated;
@@ -115,15 +115,15 @@
 
                     UserService.getUserById(review.user_id)
                         .then(function(user) {
-                            ////console.log(user);
+                            //////console.log(user);
                             var current = user;
                             current.points_collected = current.points_collected + 10;
                             UserService.updateUser(current._id, current).then(function(updated) {
 
 
                                 model.user = updated;
-                                ////console.log("Updated");
-                                ////console.log(user);
+                                //////console.log("Updated");
+                                //////console.log(user);
 
                             });
 
@@ -147,8 +147,8 @@
 
                 var key = false;
                 var revs_user = $rootScope.user.votedByMe;
-                ////console.log("Revs");
-                ////console.log(revs_user);
+                //////console.log("Revs");
+                //////console.log(revs_user);
                 for (var i = 0; i < revs_user.length; i++) {
 
                     if (revs_user[i].hotel_id === review._id) {
@@ -165,24 +165,24 @@
                     review.downvotes = review.downvotes + 1;
 
                     var updated_user = $rootScope.user;
-                    ////console.log("Updated user");
-                    ////console.log(updated_user);
+                    //////console.log("Updated user");
+                    //////console.log(updated_user);
                     var new_res = {
                         hotel_id: review._id
                     }
 
                     updated_user.votedByMe.push(new_res);
-                    ////console.log(updated_user);
-                    ////console.log("Rootscope user111111111111111111");
-                    ////console.log($rootScope.user);
-                    ////console.log($rootScope.user._id);
+                    //////console.log(updated_user);
+                    //////console.log("Rootscope user111111111111111111");
+                    //////console.log($rootScope.user);
+                    //////console.log($rootScope.user._id);
                     UserService.updateUser($rootScope.user._id, updated_user).then(function(updated) {
                         //now set the models to new names
-                        //////console.log(updated.length);
-                        ////console.log("11222");
-                        ////console.log(updated);
-                        ////console.log("Updated");
-                        ////console.log(updated);
+                        ////////console.log(updated.length);
+                        //////console.log("11222");
+                        //////console.log(updated);
+                        //////console.log("Updated");
+                        //////console.log(updated);
 
                         model.user = updated;
                         $rootScope.user = updated;
@@ -219,15 +219,15 @@
 
                     UserService.getUserById(review.user_id)
                         .then(function(user) {
-                            ////console.log(user);
+                            //////console.log(user);
                             var current = user;
                             current.points_collected = current.points_collected - 5;
                             UserService.updateUser(current._id, current).then(function(updated) {
 
 
                                 model.user = updated;
-                                ////console.log("Updated");
-                                ////console.log(user);
+                                //////console.log("Updated");
+                                //////console.log(user);
 
 
 
@@ -250,89 +250,96 @@
                 alert("You need to login to write a review!!");
                 $location.path("/login");
             }
-            review.hotel_id = resId;
-            review.upvotes = 0;
-            review.downvotes = 0;
-            var key = false;
-            var revs_user = $rootScope.user.reviewed;
-            for (var i = 0; i < revs_user.length; i++) {
+            else {
 
-                if (revs_user[i].hotel_id === resId) {
-                    key = true;
-                    break;
+                review.hotel_id = resId;
+                review.upvotes = 0;
+                review.downvotes = 0;
+                var key = false;
+                var revs_user = $rootScope.user.reviewed;
+                for (var i = 0; i < revs_user.length; i++) {
+
+                    if (revs_user[i].hotel_id === resId) {
+                        key = true;
+                        break;
+                    }
+
                 }
 
-            }
+                if (key === false) {
 
-            if (key === false) {
+                    console.log($rootScope.user);
+                    review.user_id = $rootScope.user._id;
+                    review.firstName = $rootScope.user.firstName;
+                    review.lastName = $rootScope.user.lastName;
+                    review.hotel_name = model.current.name;
+                    //////console.log(review);
 
-                ////console.log($rootScope.user);
-                review.user_id = $rootScope.user._id;
-                review.firstName = $rootScope.user.firstName;
-                review.lastName = $rootScope.user.lastName;
-                review.hotel_name = model.current.name;
-                ////console.log(review);
+                    ReviewService
+                        .addReview(review)
+                        .then(function(review) {
 
-                ReviewService
-                    .addReview(review)
-                    .then(function(review) {
-
-                        ReviewService
-                            .getReviewByHotelId(resId)
-                            .then(function(review) {
+                            ReviewService
+                                .getReviewByHotelId(resId)
+                                .then(function(review) {
 
 
-                var updated_user = $rootScope.user;
-                ////console.log("Updated user");
-                ////console.log(updated_user);
-                var new_res = {
-                    hotel_id: resId
-                }
+                    var updated_user = $rootScope.user;
+                    //////console.log("Updated user");
+                    //////console.log(updated_user);
+                    var new_res = {
+                        hotel_id: resId
+                    }
 
-                updated_user.reviewed.push(new_res);
-                ////console.log(updated_user);
-                ////console.log("Rootscope user111111111111111111");
-                ////console.log($rootScope.user);
-                ////console.log($rootScope.user._id);
-                UserService.updateUser($rootScope.user._id, updated_user).then(function(updated) {
-                    //now set the models to new names
-                    //////console.log(updated.length);
-                    ////console.log("11222");
-                    ////console.log(updated);
-                    //console.log("Updated");
-                    //console.log(updated);
+                    updated_user.reviewed.push(new_res);
+                    //////console.log(updated_user);
+                    //////console.log("Rootscope user111111111111111111");
+                    //////console.log($rootScope.user);
+                    //////console.log($rootScope.user._id);
+                    UserService.updateUser($rootScope.user._id, updated_user).then(function(updated) {
+                        //now set the models to new names
+                        ////////console.log(updated.length);
+                        //////console.log("11222");
+                        //////console.log(updated);
+                        ////console.log("Updated");
+                        ////console.log(updated);
 
-                    model.user = updated;
-                    $rootScope.user = updated;
-                    //console.log($rootScope.user);
-                    $cookieStore.put("loggedin", updated);
+                        model.user = updated;
+                        $rootScope.user = updated;
+                        ////console.log($rootScope.user);
+                        $cookieStore.put("loggedin", updated);
+                        console.log("Updated");
+                        console.log(updated);
 
-
-                });
-
-
-
-
-                                model.reviews = review;
-
-
-                                model.curr_review = review;
-
-                            });
 
                     });
 
-                ////console.log("Printing rootscope outside");
-                ////console.log($rootScope.user);
 
 
-            } else {
-                alert("You have already reviewed for this hotel!!!");
+
+                                    model.reviews = review;
+
+
+                                    model.curr_review = review;
+
+                                });
+
+                        });
+
+                    //////console.log("Printing rootscope outside");
+                    //////console.log($rootScope.user);
+
+
+                } else {
+                    alert("You have already reviewed for this hotel!!!");
+                }
+
+
+
+
+
+
             }
-
-
-
-
 
 
         }
@@ -347,13 +354,13 @@
 
         function init() {
 
-            ////console.log("Entered restaurant search........");
-            ////console.log($rootScope.user);
-            ////console.log(resId);
+            //////console.log("Entered restaurant search........");
+            //console.log($rootScope.user);
+            //////console.log(resId);
 
-            ////console.log("Entered add review");
-            ////console.log($rootScope.user);
-            ////console.log($rootScope.user.reviewed);
+            //////console.log("Entered add review");
+            //////console.log($rootScope.user);
+            //////console.log($rootScope.user.reviewed);
 
 
             ReviewService

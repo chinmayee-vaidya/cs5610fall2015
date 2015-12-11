@@ -26,7 +26,7 @@
                     ReviewService.getReviewByUserId(userId)
                         .then(function(review) {
                             model.reviews = review;
-                            //console.log(review);
+                            ////console.log(review);
 
                         });
 
@@ -44,12 +44,12 @@
                 .deleteReview(rev._id, rev)
                 .then(function(review) {
 
-                    //console.log("After deletion:");
-                    //console.log(review);
+                    ////console.log("After deletion:");
+                    ////console.log(review);
                     ReviewService.getReviewByUserId(userId)
                         .then(function(review) {
                             model.reviews = review;
-                            //console.log(review);
+                            ////console.log(review);
 
                         });
 
@@ -67,34 +67,34 @@
 
                                     var current = users[i];
 
-                                    //console.log("Current user under consideration...");
+                                    ////console.log("Current user under consideration...");
 
-                                    //console.log(current);
+                                    ////console.log(current);
                                     var rv_list = current.reviewed;
                                     var vo_list = current.votedByMe;
-                                    //console.log("Rootscope");
-                                    //console.log($rootScope.user);
+                                    ////console.log("Rootscope");
+                                    ////console.log($rootScope.user);
 
                                     for (var j = 0; j < rv_list.length; j++) {
                                         var curr = rv_list[j];
                                         if (curr.hotel_id === h) {
                                             rv_list.splice(j, 1);
                                             current.reviewed = rv_list;
-                                            //console.log("Being changed");
-                                            //console.log(current);
+                                            ////console.log("Being changed");
+                                            ////console.log(current);
 
                                             if (current._id === $rootScope.user._id) {
-                                                //console.log("Changing the value of rootscope...");
+                                                ////console.log("Changing the value of rootscope...");
                                                 $rootScope.user = current;
                                                 $cookieStore.put("loggedin", current);
-                                                //console.log($rootScope.user);
-                                                //console.log("Review delete");
-                                                //console.log(current);
+                                                ////console.log($rootScope.user);
+                                                ////console.log("Review delete");
+                                                ////console.log(current);
 
                                             }
                                             UserService.updateUser(current._id, current).then(function(updated) {
                                                 //now set the models to new names
-                                                ////console.log(updated.length);
+                                                //////console.log(updated.length);
 
                                             })
                                             key = false;
@@ -116,7 +116,7 @@
                                             }
                                             UserService.updateUser(current._id, current).then(function(updated) {
                                                 //now set the models to new names
-                                                ////console.log(updated.length);
+                                                //////console.log(updated.length);
 
                                             })
                                             key = false;
@@ -160,20 +160,20 @@
         }
 
         function init() {
-            ////console.log("In controller "+userId);
+            //////console.log("In controller "+userId);
             if ($rootScope.user === undefined) {
                 $location.path("/login");
             } else if (userId !== undefined) {
                 UserService.getUserById(userId)
                     .then(function(user) {
-                        //console.log(user);
+                        ////console.log(user);
                         model.user = user;
                         model.current_name = user.firstName + "      " + user.lastName;
                         var join = user.created;
                         var d = new Date(join);
-                        //console.log(join);
+                        ////console.log(join);
                         model.dte = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
-                        //console.log(model.dte);
+                        ////console.log(model.dte);
 
                         //initialize level progress
                         model.user.foodie_level = Math.floor((model.user.points_collected / 100) + 1);
@@ -221,7 +221,7 @@
                 ReviewService.getReviewByUserId(userId)
                     .then(function(review) {
                         model.reviews = review;
-                        //console.log(review);
+                        ////console.log(review);
 
                     });
 
@@ -234,7 +234,7 @@
 
         function updateData(user) {
 
-            //console.log("Went into update");
+            ////console.log("Went into update");
 
             //Validate user
             var updated_user = {
@@ -251,11 +251,11 @@
 
 
             };
-            //console.log(user);
+            ////console.log(user);
 
             UserService.updateUser(userId, updated_user).then(function(updated) {
                 //now set the models to new names
-                ////console.log(updated.length);
+                //////console.log(updated.length);
 
                 model.user = updated;
 

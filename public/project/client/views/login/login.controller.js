@@ -19,15 +19,15 @@
                     alert("Enter proper user credentials!!!");
                 } else {
 
-                    //console.log(user[0]);
+                    ////console.log(user[0]);
                     if (user !== null) {
                         $rootScope.user = user[0];
-                        //console.log("Setting rootscope.user");
-                        //console.log($rootScope.user);
-                        ////console.log("Login"+user);
+                        ////console.log("Setting rootscope.user");
+                        ////console.log($rootScope.user);
+                        //////console.log("Login"+user);
                         var current = user[0];
-                        //console.log("Current");
-                        //console.log(current);
+                        ////console.log("Current");
+                        ////console.log(current);
                         var uid = current._id;
                         $location.path("/profile/" + uid);
                         $cookieStore.put("loggedin", current);

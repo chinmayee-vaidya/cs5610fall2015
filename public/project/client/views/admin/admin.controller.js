@@ -54,11 +54,11 @@
 
 
             };
-            //console.log(user);
+            //////console.log(user);
 
             UserService.updateUser(user._id, updated_user).then(function(updated) {
                 //now set the models to new names
-                ////console.log(updated.length);
+                ////////console.log(updated.length);
 
                 model.user = updated;
 
@@ -125,7 +125,7 @@
 
             UserService.findAllUsers()
                 .then(function(user) {
-                    //console.log(user);
+                    //////console.log(user);
                     model.users = user;
 
                 });
@@ -134,7 +134,7 @@
                 .findAllReviews()
                 .then(function(review) {
 
-                    //console.log(review);
+                    //////console.log(review);
 
                     model.reviews = review;
 
@@ -148,12 +148,12 @@
 
         function removeUser(user) {
 
-            //console.log("In remove user");
+            //////console.log("In remove user");
 
 
             UserService.deleteUserById(user._id)
                 .then(function(user) {
-                    //console.log(user);
+                    //////console.log(user);
                     model.users = user;
 
                 });
@@ -179,9 +179,9 @@
                 });
 
 
-            //console.log("In delete revvvvvvvvvvvvvvvvvsss");
+            //////console.log("In delete revvvvvvvvvvvvvvvvvsss");
             var users = model.users;
-            //console.log(users);
+            //////console.log(users);
             var key = true;
             for (var i = 0; i < users.length; i++) {
 
@@ -189,33 +189,33 @@
 
                 var current = users[i];
 
-                //console.log("Current user under consideration...");
+                //////console.log("Current user under consideration...");
 
-                //console.log(current);
+                //////console.log(current);
                 var rv_list = current.reviewed;
                 var vo_list = current.votedByMe;
-                //console.log("Rootscope");
-                //console.log($rootScope.user);
+                //////console.log("Rootscope");
+                //////console.log($rootScope.user);
 
                 for (var j = 0; j < rv_list.length; j++) {
                     var curr = rv_list[j];
                     if (curr.hotel_id === h) {
                         rv_list.splice(j, 1);
                         current.reviewed = rv_list;
-                        //console.log("Being changed");
-                        //console.log(current);
+                        //////console.log("Being changed");
+                        //////console.log(current);
 
                         if (current._id === $rootScope.user._id) {
-                            //console.log("Changing the value of rootscope...");
+                            //////console.log("Changing the value of rootscope...");
                             $rootScope.user = current;
-                            //console.log($rootScope.user);
-                            //console.log("Review delete");
-                            //console.log(current);
+                            //////console.log($rootScope.user);
+                            //////console.log("Review delete");
+                            //////console.log(current);
 
                         }
                         UserService.updateUser(current._id, current).then(function(updated) {
                             //now set the models to new names
-                            ////console.log(updated.length);
+                            ////////console.log(updated.length);
 
                         })
                         key = false;
@@ -236,7 +236,7 @@
                         }
                         UserService.updateUser(current._id, current).then(function(updated) {
                             //now set the models to new names
-                            ////console.log(updated.length);
+                            ////////console.log(updated.length);
 
                         })
                         key = false;
@@ -247,7 +247,7 @@
 
                 UserService.findAllUsers()
                     .then(function(user) {
-                        //console.log(user);
+                        //////console.log(user);
                         model.users = user;
 
                     });

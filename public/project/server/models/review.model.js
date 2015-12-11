@@ -22,7 +22,7 @@ module.exports = function(mongoose, db) {
     return api;
 
     function deleteByUserId(id){
-        
+
     }
 
     function updateReview(fid,review){
@@ -45,7 +45,7 @@ module.exports = function(mongoose, db) {
             review.downvotes=down;
 
             review.save(function(err, review) {
-                //console.log("Server side: "+user);
+                ////console.log("Server side: "+user);
                 deferred.resolve(review);
             });
         });
@@ -68,11 +68,11 @@ module.exports = function(mongoose, db) {
     function getReviewByHotelId(id){
 
         var deferred = q.defer();
-        //console.log("in model: " + userId);
+        ////console.log("in model: " + userId);
         ReviewModel.find({
             hotel_id: id
         }, function(err, review) {
-            //console.log(user);
+            ////console.log(user);
             deferred.resolve(review);
 
         });
@@ -84,11 +84,11 @@ module.exports = function(mongoose, db) {
     function getReviewByUser(id){
 
         var deferred = q.defer();
-        //console.log("in model: " + userId);
+        ////console.log("in model: " + userId);
         ReviewModel.find({
             user_id: id
         }, function(err, review) {
-            //console.log(user);
+            ////console.log(user);
             deferred.resolve(review);
 
         });
@@ -98,11 +98,11 @@ module.exports = function(mongoose, db) {
     }
 
     function addReview(review) {
-        console.log(review);
+        //console.log(review);
         var deferred = q.defer();
         ReviewModel.create(review, function(err, review) {
-            console.log("Added");
-            console.log(review);
+            //console.log("Added");
+            //console.log(review);
             ReviewModel.find(function(err, review) {
                 deferred.resolve(review);
             });
@@ -129,11 +129,11 @@ module.exports = function(mongoose, db) {
 
 
         var deferred = q.defer();
-        //console.log("in model: " + userId);
+        ////console.log("in model: " + userId);
         UserModel.findById({
             _id: userId
         }, function(err, user) {
-            //console.log(user);
+            ////console.log(user);
             deferred.resolve(user);
 
         });
@@ -160,7 +160,7 @@ module.exports = function(mongoose, db) {
             user.email=e;
 
             user.save(function(err, user){
-                //console.log("Server side: "+user);
+                ////console.log("Server side: "+user);
                 deferred.resolve(user);
             });
         });

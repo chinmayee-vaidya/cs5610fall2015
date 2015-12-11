@@ -153,8 +153,8 @@
                 model.display = model.data;
                 SearchService.searchByTerm(model.data, $rootScope.ofst)
                     .then(function(resp) {
-                        //console.log("Searched data");
-                        //console.log(resp);
+                        ////console.log("Searched data");
+                        ////console.log(resp);
                         if (resp === undefined) {
                             alert("Item you are trying to search could not be found");
                             $location.path("/home");
@@ -169,7 +169,7 @@
 
                     });
             } else if (model.data === undefined && model.place !== undefined) {
-                ////console.log(resp);
+                //////console.log(resp);
                 model.display = model.place;
                 SearchService.searchByPlace(model.place, $rootScope.ofst)
                     .then(function(resp) {

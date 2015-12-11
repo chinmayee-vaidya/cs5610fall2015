@@ -37,7 +37,7 @@
         }
 
         function findAllUsers  (){
-            //console.log("Reached");
+            ////console.log("Reached");
             var deferred = $q.defer();
             $http.get("/api/project/user").success(function(response){
                 deferred.resolve(response);
@@ -52,7 +52,7 @@
 
             var deferred = $q.defer();
             $http.post("/api/project/user", user).success(function(response){
-                //console.log("In users.ser"+response[0]);
+                ////console.log("In users.ser"+response[0]);
                 deferred.resolve(response);
 
 
@@ -61,8 +61,8 @@
         }
 
         function deleteUserById (id){
-            //console.log("Service delete user");
-            //console.log(id);
+            ////console.log("Service delete user");
+            ////console.log(id);
 
             var deferred = $q.defer();
             $http.delete("/api/project/user/" + id).success(function(response){
@@ -73,9 +73,9 @@
 
         function updateUser(id,user)  {
 
-            //console.log("In user service");
+            ////console.log("In user service");
 
-            //console.log(user.reviewed);
+            ////console.log(user.reviewed);
 
             var deferred = $q.defer();
             $http.put("/api/project/user/" + id, user).success(function(response){
