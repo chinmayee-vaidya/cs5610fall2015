@@ -343,4 +343,7 @@ body {
         padding-top: 80px;
         padding-bottom: 100px;
     }
+    .form-heading{
+        font-size: 22px;
+    }
 }
