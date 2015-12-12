@@ -308,8 +308,8 @@
                         $rootScope.user = updated;
                         ////console.log($rootScope.user);
                         $cookieStore.put("loggedin", updated);
-                        console.log("Updated");
-                        console.log(updated);
+                        //console.log("Updated");
+                        //console.log(updated);
 
 
                     });
