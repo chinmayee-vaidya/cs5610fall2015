@@ -268,7 +268,7 @@
 
                 if (key === false) {
 
-                    console.log($rootScope.user);
+                    //console.log($rootScope.user);
                     review.user_id = $rootScope.user._id;
                     review.firstName = $rootScope.user.firstName;
                     review.lastName = $rootScope.user.lastName;

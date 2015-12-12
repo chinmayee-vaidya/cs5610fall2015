@@ -257,6 +257,8 @@
                 //now set the models to new names
                 //////console.log(updated.length);
 
+                
+
                 model.user = updated;
                 model.current_name = updated.firstName + "      " + updated.lastName;
 
