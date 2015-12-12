@@ -23,11 +23,8 @@ module.exports = function(mongoose, db) {
         ////console.log("To be created" + uname);
         ////console.log("To be created" + user);
         UserModel1.create(user, function(err, user) {
-            UserModel1.find(function(err, users) {
-                ////console.log("In user: " + users);
-                ////console.log(user._id);
-                deferred.resolve(users);
-            });
+            deferred.resolve(user);
+
         });
 
         return deferred.promise;

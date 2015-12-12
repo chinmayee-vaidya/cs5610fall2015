@@ -44,8 +44,9 @@
                         .addUser(user)
                         .then(function(users) {
 
-                            model.users = users;
-                            var c = users[users.length - 1];
+
+                            //console.log(users);
+                            var c =users;
                             $rootScope.user = c;
                             var data_id = c._id;
                             $cookieStore.put("loggedin", c);

@@ -12,6 +12,7 @@
         model.deleteReview = deleteReview;
 
         var userId = $routeParams["userId"];
+        //var userId=$cookieStore.get("loggedin");
 
         function getUserRating() {
 
@@ -161,9 +162,8 @@
 
         function init() {
             //////console.log("In controller "+userId);
-            if ($rootScope.user === undefined) {
-                $location.path("/login");
-            } else if (userId !== undefined) {
+
+             if (userId !== undefined) {
                 UserService.getUserById(userId)
                     .then(function(user) {
                         ////console.log(user);
