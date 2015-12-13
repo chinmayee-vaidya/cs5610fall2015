@@ -35,7 +35,7 @@
         function addUser(user) {
             // ////console.log("User id:"+user.username);
             if (user !== undefined) {
-                if (user.username !== undefined && user.password !== undefined && user.verify_password !== undefined && user.password == user.verify_password && user.email !== undefined) {
+                if (user.firstName!==undefined && user.lastName!==undefined && user.username !== undefined && user.password !== undefined && user.verify_password !== undefined && user.password === user.verify_password && user.email !== undefined) {
                     user.points_collected = 0;
                     user.votedByMe=[];
                     user.reviewed=[];
@@ -53,7 +53,12 @@
                             $location.path("/profile/" + data_id);
 
                         });
-                } else {
+                }else if(user.password !== user.verify_password){
+
+                        alert("Password and verify password dont match. Enter proper user credentials.");
+
+                }
+                 else {
                     alert("Enter proper user credentials");
                 }
             } else {
