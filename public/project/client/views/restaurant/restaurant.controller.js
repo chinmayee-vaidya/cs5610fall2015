@@ -35,7 +35,7 @@
 
             var c_user = $cookieStore.get("loggedin");
 
-            if (c_user === undefined) {
+            if (c_user === false) {
                 alert("You need to login to vote");
                 $location.path("/login");
             } else {
