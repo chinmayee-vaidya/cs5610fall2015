@@ -33,7 +33,9 @@
 
         function upvote(review) {
 
-            if ($rootScope.user === undefined) {
+            var c_user = $cookieStore.get("loggedin");
+
+            if (c_user === undefined) {
                 alert("You need to login to vote");
                 $location.path("/login");
             } else {
