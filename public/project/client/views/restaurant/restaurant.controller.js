@@ -33,9 +33,9 @@
 
         function upvote(review) {
 
-            var c_user = $cookieStore.get("loggedin");
+            //var c_user = $cookieStore.get("loggedin");
 
-            if (c_user === false) {
+            if ($rootScope.user === undefined) {
                 alert("You need to login to vote");
                 $location.path("/login");
             } else {
@@ -355,9 +355,7 @@
         }
 
         function init() {
-            var c_user = $cookieStore.get("loggedin");
-            if(c_user!==false)
-            $rootScope.user=c_user;
+
 
             //////console.log("Entered restaurant search........");
             //console.log($rootScope.user);
