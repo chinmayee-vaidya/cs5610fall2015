@@ -355,6 +355,9 @@
         }
 
         function init() {
+            var c_user = $cookieStore.get("loggedin");
+            if(c_user!==false)
+            $rootScope.user=c_user;
 
             //////console.log("Entered restaurant search........");
             //console.log($rootScope.user);
