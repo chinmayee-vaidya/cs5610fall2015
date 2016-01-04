@@ -33,7 +33,7 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 require("./public/assignment/server/app.js")(app,mongoose,db);
 //require("./public/mongo/server/app.js")(app,mongoose,db);
 //require("./public/dummy/server/app.js")(app,mongoose,db);
-require("./public/project/server/app.js")(app,mongoose,db);
+require("./public/project_cb/server/app.js")(app,mongoose,db);
 
 
 app.get('/hello', sayHello);
